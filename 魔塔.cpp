@@ -50,7 +50,7 @@ void UI(int blood, int power, int defense, int level, float exp, int i, int j, i
 	printf("位置x: %d \n", h.y);
 	printf("位置y: %d\n", h.x);
 	printf("------------------\n");
-	printf("你是o勇者  !是钥匙 D是大门 G是秒杀红药水  ~ & %% 是从弱到强的怪物  +是回血点\n通过wasd进行操作\n\n\n\n\n");
+	printf("你是o勇者  !是钥匙 D是大门 G是秒杀红药水  ~ & %% 是从弱到强的怪物  +是回血点\n通过wasd进行操作\n按2进入攻略，再按一次退出攻略\n\n\n");
 }
 void UI1()
 {
