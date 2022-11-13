@@ -1,0 +1,4 @@
+﻿  源.cpp
+D:\必经之路\bi-jing-zhilu\IMCA可读档游戏\IMCA可读档游戏\源.cpp(669,18): warning C4101: “k”: 未引用的局部变量
+D:\必经之路\bi-jing-zhilu\IMCA可读档游戏\IMCA可读档游戏\源.cpp(167): warning C4715: “pk”: 不是所有的控件路径都返回值
+  IMCA可读档游戏.vcxproj -> D:\必经之路\bi-jing-zhilu\IMCA可读档游戏\x64\Debug\IMCA可读档游戏.exe
