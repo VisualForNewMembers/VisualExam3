@@ -1,0 +1,8 @@
+﻿D:\VS\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(534,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Project13.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  1.cpp
+D:\project\Project13\Project13\1.cpp(236): warning C4715: “fightmo”: 不是所有的控件路径都返回值
+D:\project\Project13\Project13\1.cpp(136): warning C4715: “fightyao”: 不是所有的控件路径都返回值
+D:\project\Project13\Project13\1.cpp(169): warning C4715: “fightguai”: 不是所有的控件路径都返回值
+D:\project\Project13\Project13\1.cpp(202): warning C4715: “fightgui”: 不是所有的控件路径都返回值
+D:\project\Project13\Project13\1.cpp(445): warning C4715: “player”: 不是所有的控件路径都返回值
+  Project13.vcxproj -> D:\project\Project13\x64\Debug\text 3.exe
