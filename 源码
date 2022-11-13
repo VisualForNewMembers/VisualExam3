@@ -1,0 +1,741 @@
+# VisualExam3
+做游戏
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<iostream>
+#include <windows.h>
+#include <graphics.h>
+#include<conio.h>
+#include<easyx.h>
+#include <time.h>
+#include<mmsystem.h>
+using namespace std;
+#define 墙 __wall
+#define 地面 __fool
+#define 门 __door
+#define 钥匙 __key
+#define 红药水 __red_potion
+#define 小小怪下士 __small_small_monster
+#define 变形怪 __deformation_monster
+#define 大大怪将军 __big_big_monster
+#define 上楼梯 __stairsup
+#define 下楼梯 __stairsdow
+#define 勇者 __hero
+struct hero {
+	char name[20];
+	int hp=100;
+	int Attack=30;
+	int Armor=20;
+	int Experience=0;
+	int grade=1;
+	int key=0;
+	int x, y;
+}hero;
+
+struct monster {
+	int hp;
+	int Attack;
+	int Armor;
+	int Experience;
+}monster;
+struct monster 小小怪下士 = { 20,10,10,15 };
+struct monster 变形怪 = { 40,20,20,30 };
+struct monster 大大怪将军 = { 60,40,30,50 };
+
+
+
+int map[2][13][13] = {
+{
+		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+		{ 1, 5, 0, 0, 0, 0, 7, 0, 0, 2, 0, 0, 1 },
+		{ 1, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 1 },
+		{ 1, 0, 6, 10, 9, 0, 6, 6, 6, 6, 6, 0,1 },
+		{ 1, 0, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 6, 6, 6, 7, 1, 1, 6, 6, 6, 0, 1 },
+		{ 1, 0, 6, 10, 6, 6, 6, 6, 6, 7, 6, 0, 1 },
+		{ 1, 0, 6, 7, 6, 6, 3, 6, 1, 4, 6, 0, 1 },
+		{ 1, 0, 6, 0, 6, 6, 6, 6, 1, 4, 6, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 11, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 3, 1 },
+		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+}, {
+	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1  },
+	{ 1, 3, 11, 9, 2, 0, 6, 6, 6, 7, 0, 0, 1 },
+	{ 1, 11, 9, 2, 0, 0, 0, 0,6, 8, 0, 0, 1 },
+	{ 1, 9, 2, 2, 0, 0, 0, 0, 6, 6, 6, 0, 1 },
+	{ 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 1 },
+	{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 1 },
+	{ 1, 0, 6, 0, 0, 7, 7, 7, 0, 0, 6, 0, 1 },
+	{ 1, 0, 6, 0, 0, 8, 4, 8, 0, 6, 6, 0, 1 },
+	{ 1, 0, 6, 6, 0, 7, 7, 7, 0, 0, 6, 0, 1 },
+	{ 1, 0, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+	{ 1, 0, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 1 },
+	{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1  }
+}
+};
+//绘制地图
+int level;//层数
+void draw() {
+	cout << "月下追梦" << endl;
+	cout << "hero.hp = 100" << endl;
+	cout << "hero.Attack = 30" << endl;
+	cout << "hero.Armor = 20" << endl;
+	cout << "hero.Experience = 0" << endl;
+	cout << "hero.grade = 1" << endl;
+	cout << "hero.key = 0" << endl;
+}
+void map1(){
+	int i, j;
+	for (i = 0; i < 13; i++)
+	{
+		for (j = 0; j < 13; j++)
+		{
+			switch (map[level][i][j])
+			{
+			case 0://空地
+				printf("  ");//注意下面的符号是占两个输出位置，所以为了对齐，需要显示两个空格
+				break;
+			case 1://墙
+				printf("■");
+				break;
+			case 2://回血
+				printf("+ ");
+				break;
+			case 3://上楼
+				printf("/ ");
+				break;
+			case 4://下楼
+				printf("\\ ");
+				break;
+			case 6://障碍物
+				printf("●");
+				break;
+			case 5://人
+				printf("o ");
+				break;
+			case 7://小小怪
+				printf("& ");
+				break;
+			case 8://变心怪
+				printf("%% ");
+				break;
+			case 9://大大怪
+				printf("~ ");
+				break;
+			case 10:
+				printf("! ");
+				break;
+			case 11:
+				printf("D ");
+                break;
+			}
+		}
+		printf("\n");
+
+	}
+
+}
+
+void game() {
+
+
+
+	for (int i = 0; i < 13; i++)
+	{
+		for (int j = 0; j < 13; j++)
+		{
+			if (map[level][i][j] == 5)
+			{
+				hero.x = i;
+				hero.y = j;
+				goto NEXT_1;
+			}
+		}
+	}
+NEXT_1:
+	;
+	char ch = _getch();
+	switch (ch) {
+	case 'w':
+	case 'W':
+		if (map[level][hero.x - 1][hero.y] == 0) {
+			map[level][hero.x - 1][hero.y] += 5;
+			map[level][hero.x][hero.y] -= 5;
+		}
+		if (map[level][hero.x - 1][hero.y] == 1) {
+			map[level][hero.x][hero.y] = 5;
+			map[level][hero.x - 1][hero.y] = 1;
+		}
+		if (map[level][hero.x - 1][hero.y] == 2) {
+			map[level][hero.x - 1][hero.y] += 3;
+			map[level][hero.x][hero.y] -= 5;
+			if (hero.grade == 1 && hero.hp >= 20) {
+				hero.hp = 100;
+			}
+			if (hero.grade == 1 && (hero.hp > 0 && hero.hp <= 20)) {
+				hero.hp += 80;
+			}
+			if (hero.grade == 2 && hero.hp >= 40) {
+				hero.hp = 120;
+			}
+			if (hero.grade == 2 && (hero.hp > 0 && hero.hp <= 40)) {
+				hero.hp += 80;
+			}
+
+		}
+		if (map[level][hero.x - 1][hero.y] == 3) {
+			level++;
+			map[level][hero.x - 1][hero.y] = 5;
+			if (level == 2) {
+				printf("恭喜你勇士，你到塔顶");
+				printf("*********************");
+				printf("制作人，张作栋");
+				system("pause");
+			}
+
+			if (map[level][hero.x - 1][hero.y] == 4) {
+				level--;
+				printf("已经到塔底");
+				printf("*********************");
+				printf("制作人，张作栋");
+				system("pause");
+			}
+			if (level == 1) {
+				map[level][hero.x - 1][hero.y] += 0;
+				map[level][hero.x][hero.y] += 0;
+			}
+
+		}
+		if (map[level][hero.x - 1][hero.y] == 6) {
+			map[level][hero.x - 1][hero.y] == 0;
+			map[level][hero.x][hero.y] += 0;
+		}
+		if (map[level][hero.x - 1][hero.y] == 7) {
+			do {
+				hero.hp -= 小小怪下士.Attack;
+				小小怪下士.hp -= hero.Attack;
+			} while (小小怪下士.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x - 1][hero.y] = 5;
+				map[level][hero.x ][hero.y] = 0;
+				hero.Experience += 15;
+				if (hero.Experience >= 50) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else {
+				map[level][hero.x - 1][hero.y] = 7;
+				map[level][hero.x ][hero.y] = 0;
+				printf("game over");
+				system("pause");
+			}
+		}
+		if (map[level][hero.x - 1][hero.y] == 8) {
+			do {
+				hero.hp -= 变形怪.Attack;
+				变形怪.hp -= hero.Attack;
+			} while (变形怪.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x - 1][hero.y] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.Experience += 30;
+				if (hero.Experience >= 50) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else {
+				map[level][hero.x - 1][hero.y] = 8;
+				map[level][hero.x][hero.y] = 0;
+				printf("game over");
+				system("pause");
+			}
+		}
+			if (map[level][hero.x - 1][hero.y] == 10) {
+				map[level][hero.x - 1][hero.y] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.key++;
+			}
+			if (map[level][hero.x - 1][hero.y] == 11) {
+				if (hero.key > 0) {
+					map[level][hero.x - 1][hero.y] = 5;
+					map[level][hero.x][hero.y] = 0;
+				}
+				else {
+					map[level][hero.x - 1][hero.y] = 11;
+					map[level][hero.x][hero.y] = 5;
+				}
+			}
+			
+			if (map[level][hero.x - 1][hero.y] == 9) {
+				do {
+					hero.hp -= 大大怪将军.Attack;
+					大大怪将军.hp -= hero.Attack;
+				} while (大大怪将军.hp > 0);
+				if (hero.hp > 0) {
+					map[level][hero.x - 1][hero.y] = 5;
+					map[level][hero.x][hero.y] = 0;
+					hero.Experience += 200;
+					if (hero.Experience >= 50) {
+						hero.grade++;
+						hero.Experience -= 50;
+					}
+				}
+				else {
+					map[level][hero.x - 1][hero.y] = 9;
+					map[level][hero.x][hero.y] = 0;
+					printf("game over");
+					system("pause");
+				}
+			}
+
+			
+			break;
+	case 's':
+	case 'S':
+		if (map[level][hero.x + 1][hero.y] == 0) {
+			map[level][hero.x + 1][hero.y] += 5;
+			map[level][hero.x][hero.y] -= 5;
+		}
+		if (map[level][hero.x + 1][hero.y] == 1) {
+			map[level][hero.x][hero.y] == 5;
+			map[level][hero.x + 1][hero.y] == 0;
+		}
+		if (map[level][hero.x + 1][hero.y] == 2) {
+			map[level][hero.x + 1][hero.y] += 3;
+			map[level][hero.x][hero.y] -= 5;
+			if (hero.grade == 1 && hero.hp >= 20) {
+				hero.hp = 100;
+			}
+			if (hero.grade == 1 && (hero.hp > 0 && hero.hp <= 20)) {
+				hero.hp += 80;
+			}
+			if (hero.grade == 2 && hero.hp >= 40) {
+				hero.hp = 120;
+			}
+			if (hero.grade == 2 && (hero.hp > 0 && hero.hp <= 40)) {
+				hero.hp += 80;
+			}
+
+		}
+		if (map[level][hero.x + 1][hero.y] == 3) {
+			level++;
+			map[level][hero.x + 1][hero.y] = 5;
+			if (level == 2) {
+				printf("恭喜你勇士，你到塔顶\n");
+				printf("*********************\n");
+				printf("制作人，张作栋\n");
+
+				system("pause");
+			}
+		}
+		if (map[level][hero.x + 1][hero.y] == 4) {
+
+
+			level--;
+			printf("已经到塔底\n");
+			printf("*********************\n");
+			printf("制作人，张作栋\n");
+			system("pause");
+		}
+
+
+		if (map[level][hero.x + 1][hero.y] == 6) {
+			map[level][hero.x + 1][hero.y] == 0;
+			map[level][hero.x][hero.y] += 0;
+		}
+		if (map[level][hero.x+1][hero.y] == 7) {
+			do {
+				hero.hp -= 小小怪下士.Attack;
+				小小怪下士.hp -= hero.Attack;
+			} while (小小怪下士.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x +1][hero.y] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.Experience += 15;
+				if (hero.Experience >= 50) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else {
+				map[level][hero.x +1][hero.y] = 7;
+				map[level][hero.x][hero.y] = 0;
+				printf("game over");
+				system("pause");
+			}
+		}
+		if (map[level][hero.x + 1][hero.y] == 8) {
+			do {
+				hero.hp -= 变形怪.Attack;
+				变形怪.hp -= hero.Attack;
+			} while (变形怪.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x + 1][hero.y] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.Experience += 30;
+				if (hero.Experience >= 50) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else {
+				map[level][hero.x + 1][hero.y] = 8;
+				map[level][hero.x][hero.y] = 0;
+				printf("game over");
+				system("pause");
+			}
+		}
+		if (map[level][hero.x + 1][hero.y] == 9) {
+			do {
+				hero.hp -= 大大怪将军.Attack;
+				大大怪将军.hp -= hero.Attack;
+			} while (大大怪将军.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x + 1][hero.y] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.Experience += 30;
+				if (hero.Experience >= 200) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else {
+				map[level][hero.x + 1][hero.y] = 9;
+				map[level][hero.x][hero.y] = 0;
+				printf("game over");
+				system("pause");
+			}
+		}
+		if (map[level][hero.x + 1][hero.y] == 11) {
+			if (hero.key > 0) {
+				map[level][hero.x + 1][hero.y] = 5;
+				map[level][hero.x][hero.y] = 0;
+			}
+			else {
+				map[level][hero.x + 1][hero.y] = 11;
+				map[level][hero.x][hero.y] = 5;
+			}
+		}
+	break;
+
+
+	case 'a':
+	case 'A':
+		if (map[level][hero.x][hero.y - 1] == 0) {
+			map[level][hero.x][hero.y - 1] += 5;
+			map[level][hero.x][hero.y] -= 5;
+		}
+		if (map[level][hero.x][hero.y - 1] == 1) {
+			map[level][hero.x][hero.y] == 5;
+			map[level][hero.x][hero.y - 1] == 0;
+		}
+		if (map[level][hero.x][hero.y - 1] == 2) {
+			map[level][hero.x][hero.y - 1] += 3;
+			map[level][hero.x][hero.y] -= 5;
+			if (hero.grade == 1 && hero.hp >= 20) {
+				hero.hp = 100;
+			}
+			if (hero.grade == 1 && (hero.hp > 0 && hero.hp <= 20)) {
+				hero.hp += 80;
+			}
+			if (hero.grade == 2 && hero.hp >= 40) {
+				hero.hp = 120;
+			}
+			if (hero.grade == 2 && (hero.hp > 0 && hero.hp <= 40)) {
+				hero.hp += 80;
+			}
+
+		}
+		if (map[level][hero.x][hero.y - 1] == 3) {
+			level++;
+			map[level][hero.x][hero.y - 1] = 5;
+			if (level == 2) {
+				printf("恭喜你勇士，你到塔顶\n");
+				printf("*********************\n");
+				printf("制作人，张作栋\n");
+				system("pause");
+			}
+		}
+		if (map[level][hero.x][hero.y - 1] == 4) {
+
+
+			level--;
+			printf("已经到塔底\n");
+			printf("*********************\n");
+			printf("制作人，张作栋\n");
+			system("pause");
+		}
+
+		if (map[level][hero.x][hero.y - 1] == 6) {
+			map[level][hero.x][hero.y - 1] == 0;
+			map[level][hero.x][hero.y] += 0;
+		}
+		
+		if (map[level][hero.x ][hero.y-1] == 7) {
+			do {
+				hero.hp -= 小小怪下士.Attack;
+				小小怪下士.hp -= hero.Attack;
+			} while (小小怪下士.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x][hero.y - 1] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.Experience += 15;
+				if (hero.Experience >= 50) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else {
+				map[level][hero.x][hero.y - 1] = 7;
+				map[level][hero.x][hero.y] = 0;
+				printf("game over");
+				system("pause");
+			}
+		}
+		if (map[level][hero.x][hero.y - 1] == 8) {
+			do {
+				hero.hp -= 变形怪.Attack;
+				变形怪.hp -= hero.Attack;
+			} while (变形怪.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x][hero.y - 1] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.Experience += 30;
+				if (hero.Experience >= 50) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else {
+				map[level][hero.x][hero.y - 1] = 8;
+				map[level][hero.x][hero.y] = 0;
+				printf("game over");
+				system("pause");
+			}
+		}
+		if (map[level][hero.x][hero.y - 1] == 9) {
+			do {
+				hero.hp -= 大大怪将军.Attack;
+				大大怪将军.hp -= hero.Attack;
+			} while (大大怪将军.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x][hero.y - 1] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.Experience += 30;
+				if (hero.Experience >= 200) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else
+			{
+				map[level][hero.x][hero.y - 1] = 9;
+				map[level][hero.x][hero.y] = 0;
+				printf("game over\n");
+				system("pause");
+			}
+		}
+	
+		if (map[level][hero.x][hero.y - 1] == 10) {
+			map[level][hero.x][hero.y - 1] = 5;
+			map[level][hero.x][hero.y] = 0;
+			hero.key++;
+		}
+		if (map[level][hero.x ][hero.y-1] == 11) {
+			if (hero.key > 0) {
+				map[level][hero.x ][hero.y-1] = 5;
+				map[level][hero.x][hero.y] = 0;
+			}
+			else {
+				map[level][hero.x][hero.y-1] = 11;
+				map[level][hero.x][hero.y] = 5;
+			}
+		}
+		break;
+	case 'd':
+	case 'D':
+		if (map[level][hero.x][hero.y + 1] == 0) {
+			map[level][hero.x][hero.y + 1] += 5;
+			map[level][hero.x][hero.y] -= 5;
+		}
+		if (map[level][hero.x][hero.y + 1] == 1) {
+			map[level][hero.x][hero.y] == 5;
+			map[level][hero.x][hero.y + 1] == 0;
+		}
+		if (map[level][hero.x][hero.y + 1] == 2) {
+			map[level][hero.x][hero.y + 1] += 3;
+			map[level][hero.x][hero.y] -= 5;
+			if (hero.grade == 1 && hero.hp >= 20) {
+				hero.hp = 100;
+			}
+			if (hero.grade == 1 && (hero.hp > 0 && hero.hp <= 20)) {
+				hero.hp += 80;
+			}
+			if (hero.grade == 2 && hero.hp >= 40) {
+				hero.hp = 120;
+			}
+			if (hero.grade == 2 && (hero.hp > 0 && hero.hp <= 40)) {
+				hero.hp += 80;
+			}
+
+		}
+		if (map[level][hero.x][hero.y + 1] == 3) {
+			level++;
+			map[level][hero.x][hero.y + 1] = 5;
+			if (level == 2) {
+				printf("恭喜你勇士，你到塔顶\n");
+				printf("*********************\n");
+				printf("制作人，张作栋\n");
+				system("pause");
+			}
+		}
+		if (map[level][hero.x][hero.y + 1] == 4) {
+
+
+			level--;
+			printf("已经到塔底\n");
+			printf("*********************\n");
+			printf("制作人，张作栋\n");
+			system("pause"); 0;
+		}
+
+
+		if (map[level][hero.x][hero.y + 1] == 6) {
+			map[level][hero.x][hero.y + 1] == 0;
+			map[level][hero.x][hero.y] += 0;
+		}
+		if (map[level][hero.x][hero.y + 1] == 7) {
+			do {
+				hero.hp -= 小小怪下士.Attack;
+				小小怪下士.hp -= hero.Attack;
+			} while (小小怪下士.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x][hero.y + 1] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.Experience += 15;
+				if (hero.Experience >= 50) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else {
+				map[level][hero.x][hero.y + 1] = 7;
+				map[level][hero.x][hero.y] = 0;
+				printf("game over");
+				system("pause");
+			}
+		}
+		if (map[level][hero.x][hero.y + 1] == 8) {
+			do {
+				hero.hp -= 变形怪.Attack;
+				变形怪.hp -= hero.Attack;
+			} while (变形怪.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x][hero.y + 1] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.Experience += 30;
+				if (hero.Experience >= 50) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else {
+				map[level][hero.x][hero.y + 1] = 8;
+				map[level][hero.x][hero.y] = 0;
+				printf("game over");
+				system("pause");
+			}
+		}
+		if (map[level][hero.x][hero.y + 1] == 9) {
+			do {
+				hero.hp -= 大大怪将军.Attack;
+				大大怪将军.hp -= hero.Attack;
+			} while (大大怪将军.hp > 0);
+			if (hero.hp > 0) {
+				map[level][hero.x][hero.y + 1] = 5;
+				map[level][hero.x][hero.y] = 0;
+				hero.Experience += 30;
+				if (hero.Experience >= 200) {
+					hero.grade++;
+					hero.Experience -= 50;
+				}
+			}
+			else {
+				map[level][hero.x][hero.y + 1] = 9;
+				map[level][hero.x][hero.y] = 0;
+				printf("game over"); 
+				system("pause");
+			}
+		}
+		if (map[level][hero.x][hero.y + 1] == 11) {
+			if (hero.key > 0) {
+				map[level][hero.x][hero.y + 1] = 5;
+				map[level][hero.x][hero.y] = 0;
+			}
+			else {
+				map[level][hero.x][hero.y + 1] = 11;
+				map[level][hero.x][hero.y] = 5;
+			}
+		}
+		if (map[level][hero.x][hero.y + 1] == 10) {
+			map[level][hero.x][hero.y + 1] = 5;
+			map[level][hero.x][hero.y] = 0;
+			hero.key++;
+		}
+		}
+	}
+
+
+	
+void RenderHero()
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);//黄
+	cout << "********************" << endl;
+	cout << "等级：" << hero.grade << "  血量：" << hero.hp << endl;
+	cout << "攻击：" << hero.Attack << "  防御：" << hero.Armor << endl;
+	cout << "经验：" << hero.Experience <<  endl;
+	cout << "********************" << endl;
+	cout << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);//白
+	cout << "钥匙：" << hero.key<<endl;
+	cout << endl;
+	cout << "\t第" << level << "层" << endl;
+	cout << endl;
+}
+
+
+
+
+		void welcome() {
+
+			//输出
+
+
+			settextstyle(150, 0, _T("魔塔"));
+			settextcolor(YELLOW);
+			outtextxy(200, 100, _T("魔塔"));
+			//开始游戏
+			//作者
+			settextstyle(32, 15, _T("华文琥珀"));
+			outtextxy(500, 630, _T("制作人：视觉张作栋"));
+		}
+
+		ifstream film;
+
+int main() {
+	
+	//startup();
+	while (1) {
+		
+		map1();
+		RenderHero();
+		game();
+        system("cls");
+	}
+	
+	return 0;
+}
