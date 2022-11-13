@@ -454,6 +454,7 @@ void gamepause() {                                //游戏暂停
 	drawtext(_T("楼梯 前往其他楼层"), &a15, DT_TOP | DT_VCENTER | DT_SINGLELINE);
 	RECT a16 = { WIDTH + 40,414,P_WIDTH ,497 };
 	drawtext(_T("<--记住 这是你"), &a16, DT_TOP | DT_VCENTER | DT_SINGLELINE);
+	RECT a17 = { WIDTH + 40,500,P_WIDTH ,550 };
 	drawpixal(68, 18, BIG_COLOR, 0, 1);
 	drawcircle(68, 20, SMALL_COLOR, 0, 1);
 	keyshape(68, 22, KEY_COLOR, 0, 1);
@@ -470,6 +471,7 @@ void gamepause() {                                //游戏暂停
 			}
 			else if (ch == 27) {
                                 remove("test.txt");
+				drawtext(_T("存档成功"), &a17, DT_TOP | DT_VCENTER | DT_SINGLELINE);
 				timetest();
 				maptest(0);
 				maptest(1);
@@ -485,6 +487,7 @@ void gamepause() {                                //游戏暂停
 			}
 			else if (ch == 98) {
 				read();
+				drawtext(_T("读档成功"), &a17, DT_TOP | DT_VCENTER | DT_SINGLELINE);
 			}
 		}
 		drawbk();
