@@ -469,7 +469,7 @@ void gamepause() {                                //游戏暂停
 				break;
 			}
 			else if (ch == 27) {
-
+                                remove("test.txt");
 				timetest();
 				maptest(0);
 				maptest(1);
