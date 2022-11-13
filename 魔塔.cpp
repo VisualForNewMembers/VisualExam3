@@ -8,11 +8,11 @@
 void Input_Name()
 {
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n");
-	printf("                           Ä§Íõºá¿Õ³öÊÀ£¬Íş½«ÈË¼ä£¬ÎŞ¶ñ²»×÷£¬ÉúÁéÍ¿Ì¿£¬ºáÊ¬±éÒ°\n");
+	printf("                           é­”ç‹æ¨ªç©ºå‡ºä¸–ï¼Œå¨å°†äººé—´ï¼Œæ— æ¶ä¸ä½œï¼Œç”Ÿçµæ¶‚ç‚­ï¼Œæ¨ªå°¸éé‡\n");
 	Sleep(1000);
-	printf("                           Ìì½«ÆôÃ÷,ÓÂÕß£¬ÏÖÈç½ñÄãÑ°µÃ±¦½££¬´ø×ÅÈ«´åÈËµÄ×£Ô¸,Ì¤ÉÏÁËÄ§Ëş£¬ÓëÄ§Íõ¾öÒ»ËÀÕ½\n");
+	printf("                           å¤©å°†å¯æ˜,å‹‡è€…ï¼Œç°å¦‚ä»Šä½ å¯»å¾—å®å‰‘ï¼Œå¸¦ç€å…¨æ‘äººçš„ç¥æ„¿,è¸ä¸Šäº†é­”å¡”ï¼Œä¸é­”ç‹å†³ä¸€æ­»æˆ˜\n");
 	Sleep(1000);
-	printf("                           ÇëÎÊÓÂÕß£¬ÄãµÄÃû×ÖÊÇ>:");
+	printf("                           è¯·é—®å‹‡è€…ï¼Œä½ çš„åå­—æ˜¯>:");
 	char input = 0;
 	scanf_s("%c", &input);
 
@@ -40,17 +40,17 @@ typedef struct monsterrole
 void UI(int blood, int power, int defense, int level, float exp, int i, int j, int a, int g)
 {
 	humanrole h = { blood,power,defense,level,exp,a,i,j };
-	printf("ÑªÁ¿: %d\n", h.blood);
-	printf("¹¥»÷Á¦: %d\n", h.power);
-	printf("·ÀÓùÁ¦: %d\n", h.defense);
-	printf("µÈ¼¶: %d\n", h.level);
-	printf("¾­ÑéÖµ: %.2lf\n", (float)h.exp);
-	printf("ÃëÉ±ºìÒ©Ë®:%d\n", g);
-	printf("Ô¿³×ÊıÁ¿: %d\n", h.key);
-	printf("Î»ÖÃx: %d \n", h.y);
-	printf("Î»ÖÃy: %d\n", h.x);
+	printf("è¡€é‡: %d\n", h.blood);
+	printf("æ”»å‡»åŠ›: %d\n", h.power);
+	printf("é˜²å¾¡åŠ›: %d\n", h.defense);
+	printf("ç­‰çº§: %d\n", h.level);
+	printf("ç»éªŒå€¼: %.2lf\n", (float)h.exp);
+	printf("ç§’æ€çº¢è¯æ°´:%d\n", g);
+	printf("é’¥åŒ™æ•°é‡: %d\n", h.key);
+	printf("ä½ç½®x: %d \n", h.y);
+	printf("ä½ç½®y: %d\n", h.x);
 	printf("------------------\n");
-	printf("ÄãÊÇoÓÂÕß  !ÊÇÔ¿³× DÊÇ´óÃÅ GÊÇÃëÉ±ºìÒ©Ë®  ~ & %% ÊÇ´ÓÈõµ½Ç¿µÄ¹ÖÎï  +ÊÇ»ØÑªµã\nÍ¨¹ıwasd½øĞĞ²Ù×÷\n\n\n\n\n");
+	printf("ä½ æ˜¯oå‹‡è€…  !æ˜¯é’¥åŒ™ Dæ˜¯å¤§é—¨ Gæ˜¯ç§’æ€çº¢è¯æ°´  ~ & %% æ˜¯ä»å¼±åˆ°å¼ºçš„æ€ªç‰©  +æ˜¯å›è¡€ç‚¹\né€šè¿‡wasdè¿›è¡Œæ“ä½œ\n\n\n\n\n");
 }
 void UI1()
 {
@@ -68,51 +68,51 @@ void UI4()
 {
 	monsterrole f = { 'DRX',150,110,30 };
 }
-void SS(char map[2][13][13],int z,int i,int j,struct humanrole* ÈËÎï )      //ÓëËÀÉñ½»Ò× ¶ş·ÖÖ®Ò»µÄ¸ÅÂÊÉı2¼¶ »òÕß¿Û100Ñª
+void SS(char map[2][13][13],int z,int i,int j,struct humanrole* äººç‰© )      //ä¸æ­»ç¥äº¤æ˜“ äºŒåˆ†ä¹‹ä¸€çš„æ¦‚ç‡å‡2çº§ æˆ–è€…æ‰£100è¡€
 {
 	srand((unsigned int)time(NULL));
 	int time = rand() % 100 ;
 	if (time < 50)
 	{
-		ÈËÎï->level = ÈËÎï->level + 2;
+		äººç‰©->level = äººç‰©->level + 2;
 
 	}
 	else {
-		ÈËÎï->blood = ÈËÎï->blood - 100;
+		äººç‰©->blood = äººç‰©->blood - 100;
 	}
 	
 }
-void PK(char map[2][13][13], int z, int i, int j, struct humanrole* ÈËÎï, struct monsterrole* ¹ÖÎï, int t)                   //¶Ô¾Ö¹ı³Ì
+void PK(char map[2][13][13], int z, int i, int j, struct humanrole* äººç‰©, struct monsterrole* æ€ªç‰©, int t)                   //å¯¹å±€è¿‡ç¨‹
 {
-	int p = 20;//ÈËÎïºÍ¹ÖÎïµÄ»ù´¡¹¥»÷Á¦
+	int p = 20;//äººç‰©å’Œæ€ªç‰©çš„åŸºç¡€æ”»å‡»åŠ›
 
-	¹ÖÎï->blood = ¹ÖÎï->blood - ÈËÎï->power + ¹ÖÎï->defense - p;
-	if (¹ÖÎï->blood > 0)
+	æ€ªç‰©->blood = æ€ªç‰©->blood - äººç‰©->power + æ€ªç‰©->defense - p;
+	if (æ€ªç‰©->blood > 0)
 	{
-		ÈËÎï->blood = ÈËÎï->blood - ¹ÖÎï->power + ÈËÎï->defense - p;
-		if (ÈËÎï->blood <= 0)
+		äººç‰©->blood = äººç‰©->blood - æ€ªç‰©->power + äººç‰©->defense - p;
+		if (äººç‰©->blood <= 0)
 		{
-			printf("ÄãÒÑËÀÍö");
+			printf("ä½ å·²æ­»äº¡");
 		}
 		else
 		{
-			¹ÖÎï->blood = ¹ÖÎï->blood - ÈËÎï->power + ¹ÖÎï->defense - p;
-			if (¹ÖÎï->blood <= 0)
+			æ€ªç‰©->blood = æ€ªç‰©->blood - äººç‰©->power + æ€ªç‰©->defense - p;
+			if (æ€ªç‰©->blood <= 0)
 			{
 				map[z][i][j] = ' ';
 			}
-			else if (¹ÖÎï->blood > 0)
+			else if (æ€ªç‰©->blood > 0)
 			{
-				ÈËÎï->blood = ÈËÎï->blood - ¹ÖÎï->power + ÈËÎï->defense - p;
-				if (ÈËÎï->blood <= 0)
+				äººç‰©->blood = äººç‰©->blood - æ€ªç‰©->power + äººç‰©->defense - p;
+				if (äººç‰©->blood <= 0)
 				{
 
-					printf("ÄãÒÑËÀÍö");
+					printf("ä½ å·²æ­»äº¡");
 				}
 				else
 				{
-					¹ÖÎï->blood = ¹ÖÎï->blood - ÈËÎï->power + ¹ÖÎï->defense - p;
-					if (¹ÖÎï->blood <= 0);
+					æ€ªç‰©->blood = æ€ªç‰©->blood - äººç‰©->power + æ€ªç‰©->defense - p;
+					if (æ€ªç‰©->blood <= 0);
 					{
 
 						map[z][i][j] = ' ';
@@ -121,152 +121,152 @@ void PK(char map[2][13][13], int z, int i, int j, struct humanrole* ÈËÎï, struct
 			}
 		}
 	}
-	if (¹ÖÎï->blood <= 0);
+	if (æ€ªç‰©->blood <= 0);
 	{
 
 		map[z][i][j] = ' ';
 	}
 }
-void AddBlood(struct humanrole* ÈËÎï)     //»ØÑª¹¦ÄÜ
+void AddBlood(struct humanrole* äººç‰©)     //å›è¡€åŠŸèƒ½
 {
-	if (ÈËÎï->level == 1)
+	if (äººç‰©->level == 1)
 	{
-		if (ÈËÎï->blood > 20 && ÈËÎï->blood < 100)
+		if (äººç‰©->blood > 20 && äººç‰©->blood < 100)
 		{
 			int i = 0; int j = 0;
 			for (i = 0; i <= 80; i++)
 			{
-				ÈËÎï->blood++;
-				if (ÈËÎï->blood >= 100)
+				äººç‰©->blood++;
+				if (äººç‰©->blood >= 100)
 					break;
 			}
 		}
-		if (ÈËÎï->blood <= 20 && ÈËÎï->blood > 0)
+		if (äººç‰©->blood <= 20 && äººç‰©->blood > 0)
 		{
-			ÈËÎï->blood = ÈËÎï->blood + 80;
+			äººç‰©->blood = äººç‰©->blood + 80;
 
 		}
 	}
-	if (ÈËÎï->level == 2)
+	if (äººç‰©->level == 2)
 	{
-		if (ÈËÎï->blood <= 40 && ÈËÎï->blood > 0)
+		if (äººç‰©->blood <= 40 && äººç‰©->blood > 0)
 		{
-			ÈËÎï->blood = ÈËÎï->blood + 80;
+			äººç‰©->blood = äººç‰©->blood + 80;
 		}
-		if (ÈËÎï->blood > 40 && ÈËÎï->blood < 120)
+		if (äººç‰©->blood > 40 && äººç‰©->blood < 120)
 		{
 			int i = 0; int j = 0;
 			for (i = 0; i <= 80; i++)
 			{
-				ÈËÎï->blood++;
-				if (ÈËÎï->blood >= 120)
+				äººç‰©->blood++;
+				if (äººç‰©->blood >= 120)
 					break;
 			}
 		}
 	}
-	if (ÈËÎï->level == 3)
+	if (äººç‰©->level == 3)
 	{
-		if (ÈËÎï->blood <= 60 && ÈËÎï->blood > 0)
+		if (äººç‰©->blood <= 60 && äººç‰©->blood > 0)
 		{
-			ÈËÎï->blood = ÈËÎï->blood + 80;
+			äººç‰©->blood = äººç‰©->blood + 80;
 		}
-		if (ÈËÎï->blood > 60 && ÈËÎï->blood < 140)
+		if (äººç‰©->blood > 60 && äººç‰©->blood < 140)
 		{
 			int i = 0; int j = 0;
 			for (i = 0; i <= 80; i++)
 			{
-				ÈËÎï->blood++;
-				if (ÈËÎï->blood >= 140)
-					break;
-			}
-		}
-
-	}
-	if (ÈËÎï->level == 4)
-	{
-		if (ÈËÎï->blood <= 60 && ÈËÎï->blood > 0)
-		{
-			ÈËÎï->blood = ÈËÎï->blood + 80;
-		}
-		if (ÈËÎï->blood > 60 && ÈËÎï->blood < 160)
-		{
-			int i = 0; int j = 0;
-			for (i = 0; i <= 80; i++)
-			{
-				ÈËÎï->blood++;
-				if (ÈËÎï->blood >= 160)
+				äººç‰©->blood++;
+				if (äººç‰©->blood >= 140)
 					break;
 			}
 		}
 
 	}
-	if (ÈËÎï->level == 5)
+	if (äººç‰©->level == 4)
 	{
-		if (ÈËÎï->blood <= 60 && ÈËÎï->blood > 0)
+		if (äººç‰©->blood <= 60 && äººç‰©->blood > 0)
 		{
-			ÈËÎï->blood = ÈËÎï->blood + 80;
+			äººç‰©->blood = äººç‰©->blood + 80;
 		}
-		if (ÈËÎï->blood > 60 && ÈËÎï->blood < 180)
+		if (äººç‰©->blood > 60 && äººç‰©->blood < 160)
 		{
 			int i = 0; int j = 0;
 			for (i = 0; i <= 80; i++)
 			{
-				ÈËÎï->blood++;
-				if (ÈËÎï->blood >= 180)
+				äººç‰©->blood++;
+				if (äººç‰©->blood >= 160)
 					break;
 			}
 		}
 
 	}
-	if (ÈËÎï->level == 6)
+	if (äººç‰©->level == 5)
 	{
-		if (ÈËÎï->blood <= 60 && ÈËÎï->blood > 0)
+		if (äººç‰©->blood <= 60 && äººç‰©->blood > 0)
 		{
-			ÈËÎï->blood = ÈËÎï->blood + 80;
+			äººç‰©->blood = äººç‰©->blood + 80;
 		}
-		if (ÈËÎï->blood > 60 && ÈËÎï->blood < 200)
+		if (äººç‰©->blood > 60 && äººç‰©->blood < 180)
 		{
 			int i = 0; int j = 0;
 			for (i = 0; i <= 80; i++)
 			{
-				ÈËÎï->blood++;
-				if (ÈËÎï->blood >= 200)
+				äººç‰©->blood++;
+				if (äººç‰©->blood >= 180)
 					break;
 			}
 		}
 
 	}
-	if (ÈËÎï->level == 7)
+	if (äººç‰©->level == 6)
 	{
-		if (ÈËÎï->blood <= 60 && ÈËÎï->blood > 0)
+		if (äººç‰©->blood <= 60 && äººç‰©->blood > 0)
 		{
-			ÈËÎï->blood = ÈËÎï->blood + 80;
+			äººç‰©->blood = äººç‰©->blood + 80;
 		}
-		if (ÈËÎï->blood > 60 && ÈËÎï->blood < 220)
+		if (äººç‰©->blood > 60 && äººç‰©->blood < 200)
 		{
 			int i = 0; int j = 0;
 			for (i = 0; i <= 80; i++)
 			{
-				ÈËÎï->blood++;
-				if (ÈËÎï->blood >= 220)
+				äººç‰©->blood++;
+				if (äººç‰©->blood >= 200)
 					break;
 			}
 		}
 
 	}
-	if (ÈËÎï->level == 8)
+	if (äººç‰©->level == 7)
 	{
-		if (ÈËÎï->blood <= 60 && ÈËÎï->blood > 0)
+		if (äººç‰©->blood <= 60 && äººç‰©->blood > 0)
 		{
-			ÈËÎï->blood = ÈËÎï->blood + 80;
+			äººç‰©->blood = äººç‰©->blood + 80;
 		}
-		if (ÈËÎï->blood > 60 && ÈËÎï->blood < 240)
+		if (äººç‰©->blood > 60 && äººç‰©->blood < 220)
 		{
 			int i = 0; int j = 0;
 			for (i = 0; i <= 80; i++)
 			{
-				ÈËÎï->blood++;
-				if (ÈËÎï->blood >= 240)
+				äººç‰©->blood++;
+				if (äººç‰©->blood >= 220)
+					break;
+			}
+		}
+
+	}
+	if (äººç‰©->level == 8)
+	{
+		if (äººç‰©->blood <= 60 && äººç‰©->blood > 0)
+		{
+			äººç‰©->blood = äººç‰©->blood + 80;
+		}
+		if (äººç‰©->blood > 60 && äººç‰©->blood < 240)
+		{
+			int i = 0; int j = 0;
+			for (i = 0; i <= 80; i++)
+			{
+				äººç‰©->blood++;
+				if (äººç‰©->blood >= 240)
 					break;
 			}
 		}
@@ -274,59 +274,59 @@ void AddBlood(struct humanrole* ÈËÎï)     //»ØÑª¹¦ÄÜ
 	}
 }
 
-void EXPup(struct humanrole* ÈËÎï, int z, int i, int j, char map[2][13][13])   //´ò¹ÖµÃ¾­Ñé £¨Ëæ×ÅµÈ¼¶¶ø¾­ÑéË¥¼õ
+void EXPup(struct humanrole* äººç‰©, int z, int i, int j, char map[2][13][13])   //æ‰“æ€ªå¾—ç»éªŒ ï¼ˆéšç€ç­‰çº§è€Œç»éªŒè¡°å‡
 {
 	if (map[z][i][j] == '~')
 	{
-		if (ÈËÎï->level == 1 )
+		if (äººç‰©->level == 1 )
 		{
-			ÈËÎï->exp = ÈËÎï->exp + 25.0;
+			äººç‰©->exp = äººç‰©->exp + 25.0;
 		}
-		if (ÈËÎï->level == 2 )
+		if (äººç‰©->level == 2 )
 		{
-			ÈËÎï->exp = ÈËÎï->exp + 12.5;
+			äººç‰©->exp = äººç‰©->exp + 12.5;
 		}
-		if (ÈËÎï->level == 3|| ÈËÎï->level==4|| ÈËÎï->level==5|| ÈËÎï->level==6 || ÈËÎï->level == 7)
+		if (äººç‰©->level == 3|| äººç‰©->level==4|| äººç‰©->level==5|| äººç‰©->level==6 || äººç‰©->level == 7)
 		{
-			ÈËÎï->exp = ÈËÎï->exp + 12.5 / 2;
+			äººç‰©->exp = äººç‰©->exp + 12.5 / 2;
 		}
 	}
 	if (map[z][i][j] == '&')
 	{
-		if (ÈËÎï->level == 1)
+		if (äººç‰©->level == 1)
 		{
-			ÈËÎï->exp = ÈËÎï->exp + 25.0;
+			äººç‰©->exp = äººç‰©->exp + 25.0;
 		}
-		if (ÈËÎï->level == 2)
+		if (äººç‰©->level == 2)
 		{
-			ÈËÎï->exp = ÈËÎï->exp + 25.0;
+			äººç‰©->exp = äººç‰©->exp + 25.0;
 		}
-		if (ÈËÎï->level == 3 || ÈËÎï->level == 4 || ÈËÎï->level == 5 || ÈËÎï->level == 6 || ÈËÎï->level == 7)
+		if (äººç‰©->level == 3 || äººç‰©->level == 4 || äººç‰©->level == 5 || äººç‰©->level == 6 || äººç‰©->level == 7)
 		{
-			ÈËÎï->exp = ÈËÎï->exp + 25.0 / 2;
+			äººç‰©->exp = äººç‰©->exp + 25.0 / 2;
 		}
 	}
 	if (map[z][i][j] == '%')
 	{
-		if (ÈËÎï->level == 2)
+		if (äººç‰©->level == 2)
 		{
-			ÈËÎï->exp = ÈËÎï->exp + 50.0;
+			äººç‰©->exp = äººç‰©->exp + 50.0;
 		}
-		if (ÈËÎï->level == 3 || ÈËÎï->level == 4 || ÈËÎï->level == 5 || ÈËÎï->level == 6||ÈËÎï->level==7)
+		if (äººç‰©->level == 3 || äººç‰©->level == 4 || äººç‰©->level == 5 || äººç‰©->level == 6||äººç‰©->level==7)
 		{
-			ÈËÎï->exp = ÈËÎï->exp + 25.0;
+			äººç‰©->exp = äººç‰©->exp + 25.0;
 		}
 	}
 }
-void Levelup(struct humanrole* ÈËÎï)        //Éı¼¶¹¦ÄÜ
+void Levelup(struct humanrole* äººç‰©)        //å‡çº§åŠŸèƒ½
 {
-	if (ÈËÎï->exp >= 50)
+	if (äººç‰©->exp >= 50)
 	{
-		ÈËÎï->exp = ÈËÎï->exp - 50;
-		ÈËÎï->level = ÈËÎï->level + 1;
-		ÈËÎï->blood = ÈËÎï->blood + 20;
-		ÈËÎï->power = ÈËÎï->power + 10;
-		ÈËÎï->defense = ÈËÎï->defense + 5;
+		äººç‰©->exp = äººç‰©->exp - 50;
+		äººç‰©->level = äººç‰©->level + 1;
+		äººç‰©->blood = äººç‰©->blood + 20;
+		äººç‰©->power = äººç‰©->power + 10;
+		äººç‰©->defense = äººç‰©->defense + 5;
 	}
 }
 
@@ -355,13 +355,13 @@ void KeyDown(char map[2][13][13])
 put:
 	int z = 0;	int x = 0; int y = 0; char usekey = 0;
 	int i = 0; int j = 0; int  g = 0;
-	int  t = 0; t = t + 1;//ÈËÎïËÀÍöÊ±i=0£¬Ìø³öwhileÑ­»· 
-	int a = 0;//ÓÃÓÚ¼ÇÂ¼Ô¿³×  
-	int p = 0;//ÎªÁËÌøµØÍ¼
-	int u = 0;//ÎªÁË´ò¿ª¹¥ÂÔ
-	humanrole h = { 100,30,20,1,0,a,i,j };//ÈËÎïÊôĞÔ
+	int  t = 0; t = t + 1;//äººç‰©æ­»äº¡æ—¶i=0ï¼Œè·³å‡ºwhileå¾ªç¯ 
+	int a = 0;//ç”¨äºè®°å½•é’¥åŒ™  
+	int p = 0;//ä¸ºäº†è·³åœ°å›¾
+	int u = 0;//ä¸ºäº†æ‰“å¼€æ”»ç•¥
+	humanrole h = { 100,30,20,1,0,a,i,j };//äººç‰©å±æ€§
 	while (t) {
-		monsterrole b = { 'RNG',100,50,0 }; monsterrole c = { 'JDG', 110, 60, 5 };	monsterrole d = { 'T1',120,70,10 };//3Ö»Ğ¡¹ÖµÄÊôĞÔ
+		monsterrole b = { 'RNG',100,50,0 }; monsterrole c = { 'JDG', 110, 60, 5 };	monsterrole d = { 'T1',120,70,10 };//3åªå°æ€ªçš„å±æ€§
 		monsterrole f = { 'DRX', 150, 110, 30 };
 
 
@@ -373,7 +373,7 @@ put:
 			for (j = 0; j < 13; j++)
 			{
 				if (map[z][i][j] == 'o')
-				{                                      //Î»ÖÃ²éÕÒ
+				{                                      //ä½ç½®æŸ¥æ‰¾
 
 					break;
 
@@ -390,15 +390,15 @@ put:
 		case 'w': {
 			if (map[z][i - 1][j] == ' ')
 			{
-				map[z][i][j] = ' ';         //×ß¿ÕµØµØ
+				map[z][i][j] = ' ';         //èµ°ç©ºåœ°åœ°
 				map[z][i - 1][j] = 'o';
 			}
-			if (map[z][i][j - 1] == 'G')//Óöµ½ÃëÉ±ºìÒ©Ë®
+			if (map[z][i][j - 1] == 'G')//é‡åˆ°ç§’æ€çº¢è¯æ°´
 			{
 
 				map[z][i][j - 1] = map[z][i][j];
 				map[z][i][j] = ' ';
-				g++;//»ñµÃºìÒ©Ë®
+				g++;//è·å¾—çº¢è¯æ°´
 			}
 			if (g >= 1)
 			{
@@ -415,13 +415,13 @@ put:
 
 			if (map[z][i - 1][j] == '!')
 			{
-				map[z][i][j] = ' ';         //¼ñÔ¿³×
+				map[z][i][j] = ' ';         //æ¡é’¥åŒ™
 				map[z][i - 1][j] = 'o';
-				a++;      //¼ÇÂ¼Ô¿³×
+				a++;      //è®°å½•é’¥åŒ™
 			}
 			if (map[z][i - 1][j] == 'D' && a > 0)
 			{
-				map[z][i - 1][j] = ' ';        //Ê¹ÓÃÔ¿³×
+				map[z][i - 1][j] = ' ';        //ä½¿ç”¨é’¥åŒ™
 				a--;
 
 			}
@@ -493,11 +493,11 @@ put:
 				map[z][i][j - 1] = 'o';
 
 			}
-			if (map[z][i][j - 1] == 'G')//Óöµ½ÃëÉ±ºìÒ©Ë®
+			if (map[z][i][j - 1] == 'G')//é‡åˆ°ç§’æ€çº¢è¯æ°´
 			{
 				map[z][i][j - 1] = map[z][i][j];
 				map[z][i][j] = ' ';
-				g++;//»ñµÃºìÒ©Ë®
+				g++;//è·å¾—çº¢è¯æ°´
 			}
 			if (g >= 1)
 			{
@@ -601,15 +601,15 @@ put:
 				map[z][i][j + 1] = 'o';
 
 			}
-			if (map[z][i][j + 1] == 'G')//Óöµ½ÃëÉ±ºìÒ©Ë®
+			if (map[z][i][j + 1] == 'G')//é‡åˆ°ç§’æ€çº¢è¯æ°´
 			{
 				map[z][i][j + 1] = map[z][i][j];
 				map[z][i][j] = ' ';
-				g++;//»ñµÃºìÒ©Ë®
+				g++;//è·å¾—çº¢è¯æ°´
 			}
 			if (g >= 1)
 			{
-				if (map[z][i][j + 1] == '~' || map[z][i][j + 1] == '&' || map[z][i][j + 1] == '%')//Ê¹ÓÃºìÒ©Ë®
+				if (map[z][i][j + 1] == '~' || map[z][i][j + 1] == '&' || map[z][i][j + 1] == '%')//ä½¿ç”¨çº¢è¯æ°´
 				{
 					if (map[z][i][j + 1] == 'B')
 					{
@@ -704,11 +704,11 @@ put:
 				map[z][i][j] = ' ';
 				map[z][i + 1][j] = 'o';
 			}
-			if (map[z][i + 1][j] == 'G')//Óöµ½ÃëÉ±ºìÒ©Ë®
+			if (map[z][i + 1][j] == 'G')//é‡åˆ°ç§’æ€çº¢è¯æ°´
 			{
 				map[z][i + 1][j] = map[z][i][j];
 				map[z][i][j] = ' ';
-				g++;//»ñµÃºìÒ©Ë®
+				g++;//è·å¾—çº¢è¯æ°´
 			}
 			if (g >= 1)
 			{
@@ -804,7 +804,7 @@ put:
 			case '2':
 				system("cls");
 				
-				printf("1.´óÄ§ÍõĞèÒªÄã6¼¶²Å´òµÃ¹ı\n2.'S'´ú±íËÀÉñ,ÓĞ¶ş·ÖÖ®Ò»µÄ¸ÅÂÊÈÃÄãÉı2¼¶£¬»òÕßÊÇ¿Û100Ñª\n3.ÃëÉ±ºìÒ©Ë®Ö»ÄÜ¶Ô·ÇÄ§ÍõµÄ¹ÖÎïÓĞÓÃ\n4. ~ & % ´ÓÈõµ½Ç¿ »÷É±ºóÓĞ¾­ÑéË¥¼õ£¬µ½4¼¶ºó¾­ÑéË¥¼õ¹Ì¶¨\n");
+				printf("1.å¤§é­”ç‹éœ€è¦ä½ 6çº§æ‰æ‰“å¾—è¿‡\n2.'S'ä»£è¡¨æ­»ç¥,æœ‰äºŒåˆ†ä¹‹ä¸€çš„æ¦‚ç‡è®©ä½ å‡2çº§ï¼Œæˆ–è€…æ˜¯æ‰£100è¡€\n3.ç§’æ€çº¢è¯æ°´åªèƒ½å¯¹éé­”ç‹çš„æ€ªç‰©æœ‰ç”¨\n4. ~ & % ä»å¼±åˆ°å¼º å‡»æ€åæœ‰ç»éªŒè¡°å‡ï¼Œåˆ°4çº§åç»éªŒè¡°å‡å›ºå®š\n");
 				u = _getch();
 				if (u == 2)
 				{
@@ -819,11 +819,11 @@ put:
 	}
 	if (t == 0)
 	{
-		printf("ÄãÒÑËÀÍö\nÊÇ·ñÖØÉú£¿\nÖØÉúÇë°´1\n");
+		printf("ä½ å·²æ­»äº¡\næ˜¯å¦é‡ç”Ÿï¼Ÿ\né‡ç”Ÿè¯·æŒ‰1\n");
 	}
 	if (t == 2)
 	{
-		printf("ÓÎÏ·½áÊø£¬¹§Ï²Äã£¬ÒÑ»÷°ÜÄ§Íõ£¬ÄãÊÇ´¦ÓÚË®Éî»ğÈÈÈËÃñµÄÓ¢ĞÛ!!\nÓÎÏ·ÖÆ×÷Õß:ÖÜ½ÜÇÕ");
+		printf("æ¸¸æˆç»“æŸï¼Œæ­å–œä½ ï¼Œå·²å‡»è´¥é­”ç‹ï¼Œä½ æ˜¯å¤„äºæ°´æ·±ç«çƒ­äººæ°‘çš„è‹±é›„!!\næ¸¸æˆåˆ¶ä½œè€…:å‘¨æ°é’¦");
 	}
 }
 
@@ -845,7 +845,7 @@ put:
 				'*',' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*',' ', '*',
 				'*','D', '*', '*', '*', ' ', ' ', ' ', '*','D','*',' ','*',
 				'*','~',' ', '~', '*','*','*','D','*', ' ','*',' ','*',
-				'*',' ',' ',' ','*','!','/','~','*',' ','*','%','*',
+				'*',' ',' ',' ','*','!',' ','~','*',' ','*','%','*',
 				'*',' ',' ','!','*', '!','o','+','*','D','&','/','*',
 				'*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
 			{	'*','*','*','*','*','*','*','*','*','*','*','*','*',
