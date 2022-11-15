@@ -7,27 +7,27 @@ using namespace std;
 
 #define ESC 27           
 		               
-int gameover=0; //ÅĞ¶ÏÓÎÏ·½ø³Ì 
+int gameover=0; //åˆ¤æ–­æ¸¸æˆè¿›ç¨‹ 
  
 struct hunter{
-	int hp=100;        //¶¨ÒåÓÂÕßµÄ³õÊ¼ÑªÁ¿(health point) 
-	int max=100;       //¶¨ÒåÓÂÕßµÄ³õÊ¼×î´óÑªÁ¿  
-	int lv=1;          //¶¨ÒåÓÂÕßµÄ³õÊ¼µÈ¼¶(level)
-	int atk=30,def=20; //¶¨ÒåÓÂÕßµÄ³õÊ¼¹¥»÷Á¦(attack),·ÀÓùÁ¦(defence)
-	int exp=0;         //¶¨ÒåÓÂÕßµÄ³õÊ¼¾­ÑéÖµ(experience)
-	int key=0;         //¶¨ÒåÓÂÕßµÄ³õÊ¼Ô¿³×ÊıÁ¿ 
-	int i,j;           //ÓÂÕßµÄÎ»ÖÃ 
+	int hp=100;        //å®šä¹‰å‹‡è€…çš„åˆå§‹è¡€é‡(health point) 
+	int max=100;       //å®šä¹‰å‹‡è€…çš„åˆå§‹æœ€å¤§è¡€é‡  
+	int lv=1;          //å®šä¹‰å‹‡è€…çš„åˆå§‹ç­‰çº§(level)
+	int atk=30,def=20; //å®šä¹‰å‹‡è€…çš„åˆå§‹æ”»å‡»åŠ›(attack),é˜²å¾¡åŠ›(defence)
+	int exp=0;         //å®šä¹‰å‹‡è€…çš„åˆå§‹ç»éªŒå€¼(experience)
+	int key=0;         //å®šä¹‰å‹‡è€…çš„åˆå§‹é’¥åŒ™æ•°é‡ 
+	int i,j;           //å‹‡è€…çš„ä½ç½® 
 }fighter;
 
 struct ganster{
 	int h,a,d;
-};//¹ÖÎïµÄÊı¾İ 
+};//æ€ªç‰©çš„æ•°æ® 
 
 ganster monster[3]={{30,25,10},{60,30,20},{90,35,30}};
 
 ganster boss={150,100,50};
 
-int cas=0; //µØÍ¼²ã 
+int cas=0; //åœ°å›¾å±‚ 
                                       
 int map[2][25][50]=
 {//         5         10        15        20        25        30        35        40        45        50      
@@ -84,8 +84,8 @@ int map[2][25][50]=
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,          //25
  //         5         10        15        20        25        30        35        40        45        50  
 }; 
-//ÉÏÃæÊÇµØÍ¼µÄÉèÖÃ "0"ÊÇµØÍ¼±ß½ç£¬1"ÊÇÇ½£¬"2"ÊÇÂ·£¬"3"ÊÇ»ØÑªµã£¬"4"ÊÇÓÂÕß(ºóÃæÒ²»áÓÃ"5"À´±í´ïÓÂÕß)£¬
-//"6"ÊÇÉÏÂ¥Ìİ£¬"7"ÊÇÏÂÂ¥Ìİ£¬"8"ÊÇÔ¿³×£¬"9"ÊÇËøÉÏµÄÃÅ¡£"10","11","12"ÊÇ¹ÖÎï£¬"13"ÊÇ×îÖÕboss£¬ 
+//ä¸Šé¢æ˜¯åœ°å›¾çš„è®¾ç½® "0"æ˜¯åœ°å›¾è¾¹ç•Œï¼Œ1"æ˜¯å¢™ï¼Œ"2"æ˜¯è·¯ï¼Œ"3"æ˜¯å›è¡€ç‚¹ï¼Œ"4"æ˜¯å‹‡è€…(åé¢ä¹Ÿä¼šç”¨"5"æ¥è¡¨è¾¾å‹‡è€…)ï¼Œ
+//"6"æ˜¯ä¸Šæ¥¼æ¢¯ï¼Œ"7"æ˜¯ä¸‹æ¥¼æ¢¯ï¼Œ"8"æ˜¯é’¥åŒ™ï¼Œ"9"æ˜¯é”ä¸Šçš„é—¨ã€‚"10","11","12"æ˜¯æ€ªç‰©ï¼Œ"13"æ˜¯æœ€ç»ˆbossï¼Œ 
 
 
 void gotoxy(unsigned char x,unsigned char y)
@@ -99,22 +99,22 @@ void gotoxy(unsigned char x,unsigned char y)
 }
 
 
-int foreword()
+void foreword()
 {
-    cout<<"ÄãÊÇÒ»ÃûÓÂÕß\nÈÎÎñ£ºÌ½Ë÷µØÍ¼ÖĞ¸÷°å¿é£¨ÒÆ¶¯ÃÔ¹¬£¬¹ÖÎï»ùµØ£¬²Ø±¦¿â£¬ÃÔÎíÉ­ÁÖ£¬Ä§Íõµî£©£¬Ïû³ıĞ¡¹Ö£¬´ò°ÜÄ§Íõ£¡"<<endl;
-    cout<<"\033[47;36;5m!\033[0m\033[47;36;5m!\033[0m\033[47;36;5m!\033[0m£ºÔ¿³×  \033[47;36mD\033[0m\033[47;36mD\033[0m\033[47;36mD\033[0m£ºÃÅ  ";
-    cout<<"\033[47;34m/\033[0m\033[47;34m/\033[0m\033[47;34m/\033[0m£ºÉÏÂ¥Ìİ  \033[47;34m\\\033[0m\033[47;34m\\\033[0m\033[47;34m\\\033[0m£ºÏÂÂ¥Ìİ  ";
-	cout<<"\033[47;32m%\033[0m\033[47;32m%\033[0m\033[47;32m%\033[0m£ºÊ·À³Ä·  \033[47;33m&\033[0m\033[47;33m&\033[0m\033[47;33m&\033[0m£ºÑÒ½¬ÊŞ  ";
-	cout<<"\033[47;31m~\033[0m\033[47;31m~\033[0m\033[47;31m~\033[0m£º¶ñÁéÆïÊ¿  \033[47;35mB\033[0m\033[47;35mB\033[0m\033[47;35mB\033[0m£ºÄ§Íõ"<<endl; 
-    cout<<"¡°f¡±:È·ÈÏ¼ü£¬¡°g¡±£ºÈ¡Ïû¼ü£¬¡°ESC¡±ÊÇÍË³ö¼ü£¨ÍË³öÊ±´æµµ£©\n\n"; 
+    cout<<"ä½ æ˜¯ä¸€åå‹‡è€…\nä»»åŠ¡ï¼šæ¢ç´¢åœ°å›¾ä¸­å„æ¿å—ï¼ˆç§»åŠ¨è¿·å®«ï¼Œæ€ªç‰©åŸºåœ°ï¼Œè—å®åº“ï¼Œè¿·é›¾æ£®æ—ï¼Œé­”ç‹æ®¿ï¼‰ï¼Œæ¶ˆé™¤å°æ€ªï¼Œæ‰“è´¥é­”ç‹ï¼"<<endl;
+    cout<<"\033[47;36;5m!\033[0m\033[47;36;5m!\033[0m\033[47;36;5m!\033[0mï¼šé’¥åŒ™  \033[47;36mD\033[0m\033[47;36mD\033[0m\033[47;36mD\033[0mï¼šé—¨  ";
+    cout<<"\033[47;34m/\033[0m\033[47;34m/\033[0m\033[47;34m/\033[0mï¼šä¸Šæ¥¼æ¢¯  \033[47;34m\\\033[0m\033[47;34m\\\033[0m\033[47;34m\\\033[0mï¼šä¸‹æ¥¼æ¢¯  ";
+	cout<<"\033[47;32m%\033[0m\033[47;32m%\033[0m\033[47;32m%\033[0mï¼šå²è±å§†  \033[47;33m&\033[0m\033[47;33m&\033[0m\033[47;33m&\033[0mï¼šå²©æµ†å…½  ";
+	cout<<"\033[47;31m~\033[0m\033[47;31m~\033[0m\033[47;31m~\033[0mï¼šæ¶çµéª‘å£«  \033[47;35mB\033[0m\033[47;35mB\033[0m\033[47;35mB\033[0mï¼šé­”ç‹"<<endl; 
+    cout<<"â€œfâ€:ç¡®è®¤é”®ï¼Œâ€œgâ€ï¼šå–æ¶ˆé”®ï¼Œâ€œESCâ€æ˜¯é€€å‡ºé”®ï¼ˆé€€å‡ºæ—¶å­˜æ¡£ï¼‰\n\n"; 
 }  
 
 
-int load() //¶Áµµ 
+int load() //è¯»æ¡£ 
 {
 	int way;
 	int load;
-	cout<<"¼ÌĞøÓÎÏ·Çë°´¡°1¡±\n  ĞÂÓÎÏ·Çë°´¡°2¡±\n";
+	cout<<"ç»§ç»­æ¸¸æˆè¯·æŒ‰â€œ1â€\n  æ–°æ¸¸æˆè¯·æŒ‰â€œ2â€\n";
 	cin>>way;	
 	if(way==2)
 	{
@@ -124,23 +124,23 @@ int load() //¶Áµµ
 	{
 	    for(int w=0;w<5;w++)
 	    {
-	    	cout<<"´æµµ"<<w+1<<endl;
+	    	cout<<"å­˜æ¡£"<<w+1<<endl;
 		}
-		cout<<"Ñ¡ÔñĞòºÅ¶Áµµ£º";
+		cout<<"é€‰æ‹©åºå·è¯»æ¡£ï¼š";
 		cin>>load;
 	    ifstream mem;
 	    switch(load)
 	    {
 	    	case 1:
-	    	mem.open("´æµµ1.txt", ios::in);break;
+	    	mem.open("å­˜æ¡£1.txt", ios::in);break;
 	        case 2:
-			mem.open("´æµµ2.txt", ios::in);break;
+			mem.open("å­˜æ¡£2.txt", ios::in);break;
 			case 3:
-			mem.open("´æµµ3.txt", ios::in);break;
+			mem.open("å­˜æ¡£3.txt", ios::in);break;
 			case 4:
-			mem.open("´æµµ4.txt", ios::in);break;	
+			mem.open("å­˜æ¡£4.txt", ios::in);break;	
 			case 5:
-			mem.open("´æµµ5.txt", ios::in);break;
+			mem.open("å­˜æ¡£5.txt", ios::in);break;
 		}	
 		if (!mem.is_open())
 	    {
@@ -174,28 +174,28 @@ int load() //¶Áµµ
 }
 
 
-void save() //´æµµ 
+void save() //å­˜æ¡£ 
 { 
     int save;
     for(int w=0;w<5;w++)
     {
-    	cout<<"´æµµ"<<w+1<<endl;
+    	cout<<"å­˜æ¡£"<<w+1<<endl;
 	}
-	cout<<"Ñ¡ÔñĞòºÅ´æµµ£º";
+	cout<<"é€‰æ‹©åºå·å­˜æ¡£ï¼š";
 	cin>>save;
     ofstream mem;
     switch(save)
     {
     	case 1:
-        mem.open("´æµµ1.txt",ios::out);break;
+        mem.open("å­˜æ¡£1.txt",ios::out);break;
         case 2:
-		mem.open("´æµµ2.txt",ios::out);break;
+		mem.open("å­˜æ¡£2.txt",ios::out);break;
 		case 3:
-		mem.open("´æµµ3.txt",ios::out);break;
+		mem.open("å­˜æ¡£3.txt",ios::out);break;
 		case 4:
-		mem.open("´æµµ4.txt",ios::out);break;	
+		mem.open("å­˜æ¡£4.txt",ios::out);break;	
 		case 5:
-	    mem.open("´æµµ5.txt",ios::out);break;
+	    mem.open("å­˜æ¡£5.txt",ios::out);break;
 	}
     if (!mem.is_open())
     {
@@ -228,20 +228,20 @@ void save() //´æµµ
 }
 
 
-void drawstate()//»­ÓÂÕß×´Ì¬µÄº¯Êı
+void drawstate()//ç”»å‹‡è€…çŠ¶æ€çš„å‡½æ•°
 {
-	cout<<"    ÑªÁ¿:"<<fighter.hp<<"     "<<endl;
-	cout<<"    µÈ¼¶:"<<fighter.lv<<"     "<<endl;
-	cout<<"  ¹¥»÷Á¦:"<<fighter.atk<<"     "<<endl;
-	cout<<"  ·ÀÓùÁ¦:"<<fighter.def<<"     "<<endl;
-	cout<<"  ¾­ÑéÖµ:"<<fighter.exp<<"     "<<endl;
-	cout<<"Ô¿³×ÊıÁ¿:"<<fighter.key<<"     "<<endl; 
-	cout<<"  Î»ÖÃ x:"<<fighter.j+1<<"     "<<endl;
+	cout<<"    è¡€é‡:"<<fighter.hp<<"     "<<endl;
+	cout<<"    ç­‰çº§:"<<fighter.lv<<"     "<<endl;
+	cout<<"  æ”»å‡»åŠ›:"<<fighter.atk<<"     "<<endl;
+	cout<<"  é˜²å¾¡åŠ›:"<<fighter.def<<"     "<<endl;
+	cout<<"  ç»éªŒå€¼:"<<fighter.exp<<"     "<<endl;
+	cout<<"é’¥åŒ™æ•°é‡:"<<fighter.key<<"     "<<endl; 
+	cout<<"  ä½ç½® x:"<<fighter.j+1<<"     "<<endl;
     cout<<"       y:"<<25-fighter.i<<"     "<<endl;   
 }
 
 
-void initmap() //³õÊ¼»¯µØÍ¼ 
+void initmap() //åˆå§‹åŒ–åœ°å›¾ 
 {
 	gotoxy(0,11);
     if(cas==0)
@@ -253,33 +253,33 @@ void initmap() //³õÊ¼»¯µØÍ¼
     	    	switch(map[cas][w][c])
     	    	{
     		        case 0:
-		            cout<<"\033[100;34m#\033[0m";break;     //µØÍ¼±ß½çÓÃ"#"±íÊ¾ 
+		            cout<<"\033[100;34m#\033[0m";break;     //åœ°å›¾è¾¹ç•Œç”¨"#"è¡¨ç¤º 
     	        	case 1:
     	            case 22: 
-		        	cout<<"\033[;100m \033[0m";break;       //Ç½ÓÃ"*"±íÊ¾ 
+		        	cout<<"\033[;100m \033[0m";break;       //å¢™ç”¨"*"è¡¨ç¤º 
     	            case 2:
-		        	cout<<"\033[47;37m \033[0m";break;      //Â·ÓÃ" "±íÊ¾ 
+		        	cout<<"\033[47;37m \033[0m";break;      //è·¯ç”¨" "è¡¨ç¤º 
 	    	    	case 3:
-	        		cout<<"\033[47;31m+\033[0m";break;      //»ØÑªµã"+"±íÊ¾ 
+	        		cout<<"\033[47;31m+\033[0m";break;      //å›è¡€ç‚¹"+"è¡¨ç¤º 
 	        		case 4:
 		        	case 5:
-		        	cout<<"\033[47;31mo\033[0m";break;      //ÓÂÕßÓÃ"o"±íÊ¾ 
+		        	cout<<"\033[47;31mo\033[0m";break;      //å‹‡è€…ç”¨"o"è¡¨ç¤º 
 		        	case 6:
-		        	cout<<"\033[47;34m/\033[0m";break;      //ÉÏÂ¥ÌİÓÃ"/"±íÊ¾ 
+		        	cout<<"\033[47;34m/\033[0m";break;      //ä¸Šæ¥¼æ¢¯ç”¨"/"è¡¨ç¤º 
 		        	case 7:      
-		        	cout<<"\033[47;34m\\\033[0m";break;     //ÏÂÂ¥ÌİÓÃ"\"±íÊ¾ 
+		        	cout<<"\033[47;34m\\\033[0m";break;     //ä¸‹æ¥¼æ¢¯ç”¨"\"è¡¨ç¤º 
 		        	case 8: 
-		        	cout<<"\033[47;36;5m!\033[0m";break;    //Ô¿³×ÓÃ"!"±íÊ¾
+		        	cout<<"\033[47;36;5m!\033[0m";break;    //é’¥åŒ™ç”¨"!"è¡¨ç¤º
 					case 9: 
-		        	cout<<"\033[47;36mD\033[0m";break;      //ÃÅÓÃ"D"±íÊ¾ 
+		        	cout<<"\033[47;36mD\033[0m";break;      //é—¨ç”¨"D"è¡¨ç¤º 
 		         	case 10:
-		        	cout<<"\033[47;32m%\033[0m";break;     //¹ÖÓÃ"%"±íÊ¾ 
+		        	cout<<"\033[47;32m%\033[0m";break;     //æ€ªç”¨"%"è¡¨ç¤º 
 		        	case 11:
-		        	cout<<"\033[47;33m&\033[0m";break;      //¹ÖÓÃ"&"±íÊ¾ 
+		        	cout<<"\033[47;33m&\033[0m";break;      //æ€ªç”¨"&"è¡¨ç¤º 
 		        	case 12:
-		        	cout<<"\033[47;31m~\033[0m";break;      //¹ÖÓÃ"~"±íÊ¾
+		        	cout<<"\033[47;31m~\033[0m";break;      //æ€ªç”¨"~"è¡¨ç¤º
                     case 13:
-		        	cout<<"\033[47;35mB\033[0m";break;      //Ä§ÍõÓÃ"B"±íÊ¾ 
+		        	cout<<"\033[47;35mB\033[0m";break;      //é­”ç‹ç”¨"B"è¡¨ç¤º 
 		        }
 		    }
 		    cout<<endl; 
@@ -294,32 +294,32 @@ void initmap() //³õÊ¼»¯µØÍ¼
     	        switch(map[cas][w][c])
          	    {
     		        case 0:
-		            cout<<"\033[100;34m#\033[0m";break;     //µØÍ¼±ß½çÓÃ"#"±íÊ¾ 
+		            cout<<"\033[100;34m#\033[0m";break;     //åœ°å›¾è¾¹ç•Œç”¨"#"è¡¨ç¤º 
     	        	case 1:
-		        	cout<<"\033[;100m \033[0m";break;       //Ç½ÓÃ"*"±íÊ¾ 
+		        	cout<<"\033[;100m \033[0m";break;       //å¢™ç”¨"*"è¡¨ç¤º 
     	            case 2:
-		        	cout<<"\033[47;37m \033[0m";break;      //Â·ÓÃ" "±íÊ¾ 
+		        	cout<<"\033[47;37m \033[0m";break;      //è·¯ç”¨" "è¡¨ç¤º 
 	    	    	case 3:
-	        		cout<<"\033[47;31m+\033[0m";break;      //»ØÑªµã"+"±íÊ¾ 
+	        		cout<<"\033[47;31m+\033[0m";break;      //å›è¡€ç‚¹"+"è¡¨ç¤º 
 	        		case 4:
 		        	case 5: 
-		        	cout<<"\033[47;31mo\033[0m";break;      //ÓÂÕßÓÃ"o"±íÊ¾ 
+		        	cout<<"\033[47;31mo\033[0m";break;      //å‹‡è€…ç”¨"o"è¡¨ç¤º 
 		        	case 6:
-		        	cout<<"\033[47;34m/\033[0m";break;      //ÉÏÂ¥ÌİÓÃ"/"±íÊ¾ 
+		        	cout<<"\033[47;34m/\033[0m";break;      //ä¸Šæ¥¼æ¢¯ç”¨"/"è¡¨ç¤º 
 		        	case 7:      
-		        	cout<<"\033[47;34m\\\033[0m";break;     //ÏÂÂ¥ÌİÓÃ"\"±íÊ¾ 
+		        	cout<<"\033[47;34m\\\033[0m";break;     //ä¸‹æ¥¼æ¢¯ç”¨"\"è¡¨ç¤º 
 		        	case 8: 
-		        	cout<<"\033[47;36;5m!\033[0m";break;    //Ô¿³×ÓÃ"!"±íÊ¾
+		        	cout<<"\033[47;36;5m!\033[0m";break;    //é’¥åŒ™ç”¨"!"è¡¨ç¤º
 					case 9: 
-		        	cout<<"\033[47;36mD\033[0m";break;      //ÃÅÓÃ"D"±íÊ¾ 
+		        	cout<<"\033[47;36mD\033[0m";break;      //é—¨ç”¨"D"è¡¨ç¤º 
 		         	case 10:
-		        	cout<<"\033[47;32m%\033[0m";break;     //¹ÖÓÃ"%"±íÊ¾ 
+		        	cout<<"\033[47;32m%\033[0m";break;     //æ€ªç”¨"%"è¡¨ç¤º 
 		        	case 11:
-		        	cout<<"\033[47;33m&\033[0m";break;      //¹ÖÓÃ"&"±íÊ¾ 
+		        	cout<<"\033[47;33m&\033[0m";break;      //æ€ªç”¨"&"è¡¨ç¤º 
 		        	case 12:
-		        	cout<<"\033[47;31m~\033[0m";break;      //¹ÖÓÃ"~"±íÊ¾
+		        	cout<<"\033[47;31m~\033[0m";break;      //æ€ªç”¨"~"è¡¨ç¤º
                     case 13:
-		        	cout<<"\033[47;35mB\033[0m";break;      //Ä§ÍõÓÃ"B"±íÊ¾ 
+		        	cout<<"\033[47;35mB\033[0m";break;      //é­”ç‹ç”¨"B"è¡¨ç¤º 
 	            }
 		    }
 		    cout<<endl;
@@ -344,32 +344,32 @@ void initmap() //³õÊ¼»¯µØÍ¼
     	            switch(map[cas][w][c])
     	    	    {
     		        case 0:
-		            cout<<"\033[100;34m#\033[0m";break;     //µØÍ¼±ß½çÓÃ"#"±íÊ¾ 
+		            cout<<"\033[100;34m#\033[0m";break;     //åœ°å›¾è¾¹ç•Œç”¨"#"è¡¨ç¤º 
     	        	case 1:
-		        	cout<<"\033[43;32m*\033[0m";break;      //Ç½ÓÃ"*"±íÊ¾ 
+		        	cout<<"\033[43;32m*\033[0m";break;      //å¢™ç”¨"*"è¡¨ç¤º 
     	            case 2:
-		        	cout<<"\033[43;33m \033[0m";break;      //Â·ÓÃ" "±íÊ¾ 
+		        	cout<<"\033[43;33m \033[0m";break;      //è·¯ç”¨" "è¡¨ç¤º 
 	    	    	case 3:
-	        		cout<<"\033[43;31m+\033[0m";break;      //»ØÑªµã"+"±íÊ¾ 
+	        		cout<<"\033[43;31m+\033[0m";break;      //å›è¡€ç‚¹"+"è¡¨ç¤º 
 	        		case 4:
 		        	case 5: 
-		        	cout<<"\033[43;31mo\033[0m";break;      //ÓÂÕßÓÃ"o"±íÊ¾ 
+		        	cout<<"\033[43;31mo\033[0m";break;      //å‹‡è€…ç”¨"o"è¡¨ç¤º 
 		        	case 6:
-		        	cout<<"\033[43;34m/\033[0m";break;      //ÉÏÂ¥ÌİÓÃ"/"±íÊ¾ 
+		        	cout<<"\033[43;34m/\033[0m";break;      //ä¸Šæ¥¼æ¢¯ç”¨"/"è¡¨ç¤º 
 		        	case 7:      
-		        	cout<<"\033[43;34m\\\033[0m";break;     //ÏÂÂ¥ÌİÓÃ"\"±íÊ¾ 
+		        	cout<<"\033[43;34m\\\033[0m";break;     //ä¸‹æ¥¼æ¢¯ç”¨"\"è¡¨ç¤º 
 		        	case 8: 
-		        	cout<<"\033[43;36;5m!\033[0m";break;    //Ô¿³×ÓÃ"!"±íÊ¾
+		        	cout<<"\033[43;36;5m!\033[0m";break;    //é’¥åŒ™ç”¨"!"è¡¨ç¤º
 					case 9: 
-		        	cout<<"\033[43;36mD\033[0m";break;      //ÃÅÓÃ"D"±íÊ¾ 
+		        	cout<<"\033[43;36mD\033[0m";break;      //é—¨ç”¨"D"è¡¨ç¤º 
 		         	case 10:
-		        	cout<<"\033[43;32m%\033[0m";break;     //¹ÖÓÃ"%"±íÊ¾ 
+		        	cout<<"\033[43;32m%\033[0m";break;     //æ€ªç”¨"%"è¡¨ç¤º 
 		        	case 11:
-		        	cout<<"\033[43;33m&\033[0m";break;      //¹ÖÓÃ"&"±íÊ¾ 
+		        	cout<<"\033[43;33m&\033[0m";break;      //æ€ªç”¨"&"è¡¨ç¤º 
 		        	case 12:
-		        	cout<<"\033[43;31m~\033[0m";break;      //¹ÖÓÃ"~"±íÊ¾
+		        	cout<<"\033[43;31m~\033[0m";break;      //æ€ªç”¨"~"è¡¨ç¤º
                     case 13:
-		        	cout<<"\033[43;35mB\033[0m";break;      //Ä§ÍõÓÃ"B"±íÊ¾ 
+		        	cout<<"\033[43;35mB\033[0m";break;      //é­”ç‹ç”¨"B"è¡¨ç¤º 
 		            }
 		        }
 			    else 
@@ -390,43 +390,43 @@ void initmap() //³õÊ¼»¯µØÍ¼
 }
 
 
-void drawmap_1(int *p) //ÆÕÍ¨µÄ»­µØÍ¼ 
+void drawmap_1(int *p) //æ™®é€šçš„ç”»åœ°å›¾ 
 {
 	switch(*p)
 	{
 	    case 0:
-	    cout<<"\033[100;34m#\033[0m";break;     //µØÍ¼±ß½çÓÃ"#"±íÊ¾ 
+	    cout<<"\033[100;34m#\033[0m";break;     //åœ°å›¾è¾¹ç•Œç”¨"#"è¡¨ç¤º 
 	  	case 1:
 	    case 22: 
-	   	cout<<"\033[;100m \033[0m";break;       //Ç½ÓÃ"*"±íÊ¾ 
+	   	cout<<"\033[;100m \033[0m";break;       //å¢™ç”¨"*"è¡¨ç¤º 
 	    case 2:
-	   	cout<<"\033[47;37m \033[0m";break;      //Â·ÓÃ" "±íÊ¾ 
+	   	cout<<"\033[47;37m \033[0m";break;      //è·¯ç”¨" "è¡¨ç¤º 
 	  	case 3:
-		cout<<"\033[47;31m+\033[0m";break;      //»ØÑªµã"+"±íÊ¾ 
+		cout<<"\033[47;31m+\033[0m";break;      //å›è¡€ç‚¹"+"è¡¨ç¤º 
 		case 4:
 		case 5:
-	   	cout<<"\033[47;31mo\033[0m";break;      //ÓÂÕßÓÃ"o"±íÊ¾ 
+	   	cout<<"\033[47;31mo\033[0m";break;      //å‹‡è€…ç”¨"o"è¡¨ç¤º 
 	   	case 6:
-	 	cout<<"\033[47;34m/\033[0m";break;      //ÉÏÂ¥ÌİÓÃ"/"±íÊ¾ 
+	 	cout<<"\033[47;34m/\033[0m";break;      //ä¸Šæ¥¼æ¢¯ç”¨"/"è¡¨ç¤º 
 		case 7:      
-	 	cout<<"\033[47;34m\\\033[0m";break;     //ÏÂÂ¥ÌİÓÃ"\"±íÊ¾ 
+	 	cout<<"\033[47;34m\\\033[0m";break;     //ä¸‹æ¥¼æ¢¯ç”¨"\"è¡¨ç¤º 
 		case 8: 
-	   	cout<<"\033[47;36;5m!\033[0m";break;    //Ô¿³×ÓÃ"!"±íÊ¾
+	   	cout<<"\033[47;36;5m!\033[0m";break;    //é’¥åŒ™ç”¨"!"è¡¨ç¤º
 		case 9: 
-	 	cout<<"\033[47;36mD\033[0m";break;      //ÃÅÓÃ"D"±íÊ¾ 
+	 	cout<<"\033[47;36mD\033[0m";break;      //é—¨ç”¨"D"è¡¨ç¤º 
 	 	case 10:
-	 	cout<<"\033[47;32m%\033[0m";break;     //¹ÖÓÃ"%"±íÊ¾ 
+	 	cout<<"\033[47;32m%\033[0m";break;     //æ€ªç”¨"%"è¡¨ç¤º 
 	   	case 11:
-	   	cout<<"\033[47;33m&\033[0m";break;      //¹ÖÓÃ"&"±íÊ¾ 
+	   	cout<<"\033[47;33m&\033[0m";break;      //æ€ªç”¨"&"è¡¨ç¤º 
 	    case 12:
-	   	cout<<"\033[47;31m~\033[0m";break;      //¹ÖÓÃ"~"±íÊ¾
+	   	cout<<"\033[47;31m~\033[0m";break;      //æ€ªç”¨"~"è¡¨ç¤º
 	    case 13:
-	   	cout<<"\033[47;35mB\033[0m";break;      //Ä§ÍõÓÃ"B"±íÊ¾ 
+	   	cout<<"\033[47;35mB\033[0m";break;      //é­”ç‹ç”¨"B"è¡¨ç¤º 
 	}
 }
 
 
-void drawmap_2() //ÃÔÎíÉ­ÁÖÖĞµÄ»­µØÍ¼ 
+void drawmap_2() //è¿·é›¾æ£®æ—ä¸­çš„ç”»åœ°å›¾ 
 {
 	for(int w=fighter.i-2;w<=fighter.i+2;w++)
 	{
@@ -449,32 +449,32 @@ void drawmap_2() //ÃÔÎíÉ­ÁÖÖĞµÄ»­µØÍ¼
 			        switch(map[cas][w][c])
 				    {
 				        case 0:
-				        cout<<"\033[100;34m#\033[0m";break;     //µØÍ¼±ß½çÓÃ"#"±íÊ¾ 
+				        cout<<"\033[100;34m#\033[0m";break;     //åœ°å›¾è¾¹ç•Œç”¨"#"è¡¨ç¤º 
 				    	case 1:
-				    	cout<<"\033[43;32m*\033[0m";break;      //Ç½ÓÃ"*"±íÊ¾ 
+				    	cout<<"\033[43;32m*\033[0m";break;      //å¢™ç”¨"*"è¡¨ç¤º 
 				        case 2:
-				    	cout<<"\033[43;33m \033[0m";break;      //Â·ÓÃ" "±íÊ¾ 
+				    	cout<<"\033[43;33m \033[0m";break;      //è·¯ç”¨" "è¡¨ç¤º 
 				    	case 3:
-						cout<<"\033[43;31m+\033[0m";break;      //»ØÑªµã"+"±íÊ¾ 
+						cout<<"\033[43;31m+\033[0m";break;      //å›è¡€ç‚¹"+"è¡¨ç¤º 
 						case 4:
 				    	case 5: 
-				    	cout<<"\033[43;31mo\033[0m";break;      //ÓÂÕßÓÃ"o"±íÊ¾ 
+				    	cout<<"\033[43;31mo\033[0m";break;      //å‹‡è€…ç”¨"o"è¡¨ç¤º 
 				    	case 6:
-				    	cout<<"\033[43;34m/\033[0m";break;      //ÉÏÂ¥ÌİÓÃ"/"±íÊ¾ 
+				    	cout<<"\033[43;34m/\033[0m";break;      //ä¸Šæ¥¼æ¢¯ç”¨"/"è¡¨ç¤º 
 				    	case 7:      
-				    	cout<<"\033[43;34m\\\033[0m";break;     //ÏÂÂ¥ÌİÓÃ"\"±íÊ¾ 
+				    	cout<<"\033[43;34m\\\033[0m";break;     //ä¸‹æ¥¼æ¢¯ç”¨"\"è¡¨ç¤º 
 				    	case 8: 
-				    	cout<<"\033[43;36;5m!\033[0m";break;    //Ô¿³×ÓÃ"!"±íÊ¾
+				    	cout<<"\033[43;36;5m!\033[0m";break;    //é’¥åŒ™ç”¨"!"è¡¨ç¤º
 						case 9: 
-				    	cout<<"\033[43;36mD\033[0m";break;      //ÃÅÓÃ"D"±íÊ¾ 
+				    	cout<<"\033[43;36mD\033[0m";break;      //é—¨ç”¨"D"è¡¨ç¤º 
 				     	case 10:
-				    	cout<<"\033[43;32m%\033[0m";break;     //¹ÖÓÃ"%"±íÊ¾ 
+				    	cout<<"\033[43;32m%\033[0m";break;     //æ€ªç”¨"%"è¡¨ç¤º 
 				    	case 11:
-				    	cout<<"\033[43;33m&\033[0m";break;      //¹ÖÓÃ"&"±íÊ¾ 
+				    	cout<<"\033[43;33m&\033[0m";break;      //æ€ªç”¨"&"è¡¨ç¤º 
 				    	case 12:
-				    	cout<<"\033[43;31m~\033[0m";break;      //¹ÖÓÃ"~"±íÊ¾
+				    	cout<<"\033[43;31m~\033[0m";break;      //æ€ªç”¨"~"è¡¨ç¤º
 				        case 13:
-				    	cout<<"\033[43;35mB\033[0m";break;      //Ä§ÍõÓÃ"B"±íÊ¾ 
+				    	cout<<"\033[43;35mB\033[0m";break;      //é­”ç‹ç”¨"B"è¡¨ç¤º 
 			        }
 				}
 				else
@@ -486,7 +486,7 @@ void drawmap_2() //ÃÔÎíÉ­ÁÖÖĞµÄ»­µØÍ¼
     }
 }
 
-void drawmap_3() //ÒÆ¶¯ÃÔ¹¬ÖĞµÄ»­µØÍ¼ 
+void drawmap_3() //ç§»åŠ¨è¿·å®«ä¸­çš„ç”»åœ°å›¾ 
 {
     for(int w=17;w<=20;w+=3)
 	{
@@ -529,7 +529,7 @@ void drawmap_3() //ÒÆ¶¯ÃÔ¹¬ÖĞµÄ»­µØÍ¼
 } 
 
 
-void search() //Ñ°ÕÒÓÂÕßµÄº¯Êı 
+void search() //å¯»æ‰¾å‹‡è€…çš„å‡½æ•° 
 { 
 	for(fighter.i=0;fighter.i<25;fighter.i++)
 	{
@@ -544,49 +544,49 @@ void search() //Ñ°ÕÒÓÂÕßµÄº¯Êı
    		{
     		break; 
 		}  
-	}  //ÕÒ³öÓÂÕß
+	}  //æ‰¾å‡ºå‹‡è€…
 }
 
 
-void type() //ÖÜ±ß¹ÖÎïµÄÖÖÀà 
+void type() //å‘¨è¾¹æ€ªç‰©çš„ç§ç±» 
 {
 	gotoxy(55,13);
 	int typefind=0;
 	if(map[cas][fighter.i-1][fighter.j-1]==10||map[cas][fighter.i][fighter.j-1]==10||map[cas][fighter.i+1][fighter.j-1]==10||map[cas][fighter.i-1][fighter.j]==10||
 	map[cas][fighter.i+1][fighter.j]==10||map[cas][fighter.i-1][fighter.j+1]==10||map[cas][fighter.i][fighter.j+1]==10||map[cas][fighter.i+1][fighter.j+1]==10)
 	{
-	    cout<<"ÅÔ±ßÓĞÂÌÉ«µÄ¡°Ê·À³Ä·¡±(Ğ¡¹Ö)   ";
+	    cout<<"æ—è¾¹æœ‰ç»¿è‰²çš„â€œå²è±å§†â€(å°æ€ª)   ";
 	    gotoxy(55,14);
-		cout<<"ÑªÁ¿£º"<<monster[0].h<<" ¹¥»÷Á¦£º"<<monster[0].a<<" ·ÀÓùÁ¦£º"<<monster[0].d;
+		cout<<"è¡€é‡ï¼š"<<monster[0].h<<" æ”»å‡»åŠ›ï¼š"<<monster[0].a<<" é˜²å¾¡åŠ›ï¼š"<<monster[0].d;
 		typefind=1; 
 	}
 	else if(map[cas][fighter.i-1][fighter.j-1]==11||map[cas][fighter.i][fighter.j-1]==11||map[cas][fighter.i+1][fighter.j-1]==11||map[cas][fighter.i-1][fighter.j]==11||
 	map[cas][fighter.i+1][fighter.j]==11||map[cas][fighter.i-1][fighter.j+1]==11||map[cas][fighter.i][fighter.j+1]==11||map[cas][fighter.i+1][fighter.j+1]==11)
 	{
-		cout<<"ÅÔ±ßÓĞ»ÆÉ«µÄ¡°ÑÒ½¬ÊŞ¡±(Ğ¡¹Ö)   ";
+		cout<<"æ—è¾¹æœ‰é»„è‰²çš„â€œå²©æµ†å…½â€(å°æ€ª)   ";
 		gotoxy(55,14);
-		cout<<"ÑªÁ¿£º"<<monster[1].h<<" ¹¥»÷Á¦£º"<<monster[1].a<<" ·ÀÓùÁ¦£º"<<monster[1].d;
+		cout<<"è¡€é‡ï¼š"<<monster[1].h<<" æ”»å‡»åŠ›ï¼š"<<monster[1].a<<" é˜²å¾¡åŠ›ï¼š"<<monster[1].d;
 		typefind=1;
 	}
 	else if(map[cas][fighter.i-1][fighter.j-1]==12||map[cas][fighter.i][fighter.j-1]==12||map[cas][fighter.i+1][fighter.j-1]==12||map[cas][fighter.i-1][fighter.j]==12||
 	map[cas][fighter.i+1][fighter.j]==12||map[cas][fighter.i-1][fighter.j+1]==12||map[cas][fighter.i][fighter.j+1]==12||map[cas][fighter.i+1][fighter.j+1]==12)
 	{
-		cout<<"ÅÔ±ßÓĞºìÉ«µÄ¡°¶ñÁéÆïÊ¿¡±(Ğ¡¹Ö) ";
+		cout<<"æ—è¾¹æœ‰çº¢è‰²çš„â€œæ¶çµéª‘å£«â€(å°æ€ª) ";
 		gotoxy(55,14);
-		cout<<"ÑªÁ¿£º"<<monster[2].h<<" ¹¥»÷Á¦£º"<<monster[2].a<<" ·ÀÓùÁ¦£º"<<monster[2].d;
+		cout<<"è¡€é‡ï¼š"<<monster[2].h<<" æ”»å‡»åŠ›ï¼š"<<monster[2].a<<" é˜²å¾¡åŠ›ï¼š"<<monster[2].d;
 		typefind=1;
 	}
 	else if(map[cas][fighter.i-1][fighter.j-1]==13||map[cas][fighter.i][fighter.j-1]==13||map[cas][fighter.i+1][fighter.j-1]==13||map[cas][fighter.i-1][fighter.j]==13||
 	map[cas][fighter.i+1][fighter.j]==13||map[cas][fighter.i-1][fighter.j+1]==13||map[cas][fighter.i][fighter.j+1]==13||map[cas][fighter.i+1][fighter.j+1]==13)
 	{
-		cout<<"ÅÔ±ßÓĞ×ÏÉ«µÄ¡°Ä§Íõ¡±£¨boss£©   "; 
+		cout<<"æ—è¾¹æœ‰ç´«è‰²çš„â€œé­”ç‹â€ï¼ˆbossï¼‰   "; 
 		gotoxy(55,14);
-		cout<<"ÑªÁ¿£º"<<boss.h<<" ¹¥»÷Á¦£º"<<boss.a<<" ·ÀÓùÁ¦£º"<<boss.d;
+		cout<<"è¡€é‡ï¼š"<<boss.h<<" æ”»å‡»åŠ›ï¼š"<<boss.a<<" é˜²å¾¡åŠ›ï¼š"<<boss.d;
 		typefind=1;
 	}
 	else if(!typefind)
 	{
-		cout<<"ÅÔ±ßÃ»ÓĞ¹Ö                     ";
+		cout<<"æ—è¾¹æ²¡æœ‰æ€ª                     ";
 		gotoxy(55,14);
 		cout<<"                               "; 
 	}
@@ -600,46 +600,46 @@ void type() //ÖÜ±ß¹ÖÎïµÄÖÖÀà
 }
 
 
-void location() //Íæ¼Òµ±Ç°µÄÎ»ÖÃ 
+void location() //ç©å®¶å½“å‰çš„ä½ç½® 
 {
 	gotoxy(55,16);
 	if((fighter.i>1&&fighter.i<7)&&(fighter.j>2&&fighter.j<20))
 	{
-		cout<<"ÄãÕıÔÚ¹ÖÎïµÄ»ùµØ";
+		cout<<"ä½ æ­£åœ¨æ€ªç‰©çš„åŸºåœ°";
 		gotoxy(55,17);
-		cout<<"´ò°Ü¹ÖÎï²¢Í¨¹ıÕâÀïÈ¥µ½ÀïÃæµÄ²Ø±¦¿â°É£¡";
+		cout<<"æ‰“è´¥æ€ªç‰©å¹¶é€šè¿‡è¿™é‡Œå»åˆ°é‡Œé¢çš„è—å®åº“å§ï¼";
 		gotoxy(55,18);
-		cout<<"\033[40;31m£¨²Ø±¦¿â´æ·Å×ÅÍ¨ÍùÃÔÎíÉ­ÁÖµÄÔ¿³×£©\033[0m       "; 
+		cout<<"\033[40;31mï¼ˆè—å®åº“å­˜æ”¾ç€é€šå¾€è¿·é›¾æ£®æ—çš„é’¥åŒ™ï¼‰\033[0m       "; 
 	}
 	else if(cas==0&&(fighter.i>7&&fighter.i<15)&&(fighter.j>2&fighter.j<16))
 	{
-		cout<<"ÄãÕıÔÚ²Ø±¦¿â    ";
+		cout<<"ä½ æ­£åœ¨è—å®åº“    ";
 		gotoxy(55,17);
-		cout<<"¿ìÈ¥ÄÃÍ¨ÍùÃÔÎíÉ­ÁÖµÄÔ¿³×£¡            ";
+		cout<<"å¿«å»æ‹¿é€šå¾€è¿·é›¾æ£®æ—çš„é’¥åŒ™ï¼            ";
 		gotoxy(55,18);
 		cout<<"                                                           "; 
 	}
 	else if(cas==0&&(fighter.i>1&&fighter.i<7)&&(fighter.j>20&fighter.j<29))
 	{
-		cout<<"ÄãÕıÔÚÄ§Íõµî    ";
+		cout<<"ä½ æ­£åœ¨é­”ç‹æ®¿    ";
 		gotoxy(55,17);
-		cout<<"¿ìÈ¥´ò°ÜÄ§Íõ°É£¡                      ";
+		cout<<"å¿«å»æ‰“è´¥é­”ç‹å§ï¼                      ";
 		gotoxy(55,18);
 		cout<<"                                                           ";
 	}
 	else if(cas==0&&(fighter.i>16&&fighter.i<23)&&(fighter.j>2&fighter.j<16))
 	{
-		cout<<"ÄãÕıÔÚÒÆ¶¯ÃÔ¹¬  ";
+		cout<<"ä½ æ­£åœ¨ç§»åŠ¨è¿·å®«  ";
 		gotoxy(55,17);
-		cout<<"ÏëºÃÁËÔÙ²Ù×÷àŞ£¬¿É±ğ±»Ç½Ñ¹±âÁË£¡      ";
+		cout<<"æƒ³å¥½äº†å†æ“ä½œå™¢ï¼Œå¯åˆ«è¢«å¢™å‹æ‰äº†ï¼      ";
 		gotoxy(55,18);
-		cout<<"\033[40;31m£¨ÒÆ¶¯ÃÔ¹¬ÄÚ²¿¿ÉÒÔÄÃµ½½ø¹ÖÎï»ùµØµÄÔ¿³×£©\033[0m "; 
+		cout<<"\033[40;31mï¼ˆç§»åŠ¨è¿·å®«å†…éƒ¨å¯ä»¥æ‹¿åˆ°è¿›æ€ªç‰©åŸºåœ°çš„é’¥åŒ™ï¼‰\033[0m "; 
 	}
 	else if(cas==1&&(fighter.i>12&&fighter.i<24)&&(fighter.j>0&&fighter.j<49))
 	{
-		cout<<"ÄãÕıÔÚÃÔÎíÉ­ÁÖ  ";
+		cout<<"ä½ æ­£åœ¨è¿·é›¾æ£®æ—  ";
 		gotoxy(55,17);
-		cout<<"Ä¨ºÚÇ°ĞĞ²¢ÕÒµ½Í¨ÍùÄ§ÍõµîµÄÂ·°É£¡      "; 
+		cout<<"æŠ¹é»‘å‰è¡Œå¹¶æ‰¾åˆ°é€šå¾€é­”ç‹æ®¿çš„è·¯å§ï¼      "; 
 		gotoxy(55,18);
 		cout<<"                                                           "; 
 	}
@@ -654,31 +654,31 @@ void location() //Íæ¼Òµ±Ç°µÄÎ»ÖÃ
 }
 
 
-int interaction(int num) //ÓÎÍæÊ±µÄ½»»¥ 
+int interaction(int num) //æ¸¸ç©æ—¶çš„äº¤äº’ 
 {
 	switch(num)
     {
         case 6:
-		cout<<"ÊÇ·ñÉÏÂ¥Ìİ\n°´¡°f¡±È·ÈÏ£¬°´ÆäËû¼üÈ¡Ïû\n";break; 
+		cout<<"æ˜¯å¦ä¸Šæ¥¼æ¢¯\næŒ‰â€œfâ€ç¡®è®¤ï¼ŒæŒ‰å…¶ä»–é”®å–æ¶ˆ\n";break; 
 		case 7:
-		cout<<"ÊÇ·ñÏÂÂ¥Ìİ\n°´¡°f¡±È·ÈÏ£¬°´ÆäËû¼üÈ¡Ïû\n";break; 
+		cout<<"æ˜¯å¦ä¸‹æ¥¼æ¢¯\næŒ‰â€œfâ€ç¡®è®¤ï¼ŒæŒ‰å…¶ä»–é”®å–æ¶ˆ\n";break; 
 		case 9:
 		if(fighter.key)
 		{
-    		cout<<"ÄãÓĞ"<<fighter.key<<"°ÑÔ¿³×,ÊÇ·ñÊ¹ÓÃÒ»°Ñ¿ªÃÅ\n°´¡°f¡±²¢È·ÈÏ£¬°´ÆäËû¼üÈ¡Ïû\n";break;
+    		cout<<"ä½ æœ‰"<<fighter.key<<"æŠŠé’¥åŒ™,æ˜¯å¦ä½¿ç”¨ä¸€æŠŠå¼€é—¨\næŒ‰â€œfâ€å¹¶ç¡®è®¤ï¼ŒæŒ‰å…¶ä»–é”®å–æ¶ˆ\n";break;
         }
 		else
     	{
-		    cout<<"ÄãÏÖÔÚÃ»ÓĞÔ¿³×\n°´¡°f¡±¼ÌĞø\n";break; 
+		    cout<<"ä½ ç°åœ¨æ²¡æœ‰é’¥åŒ™\næŒ‰â€œfâ€ç»§ç»­\n";break; 
 	    }
 		case 10:
     	case 11:
     	case 12:
-    	cout<<"ÊÇ·ñºÍ¹ÖÎï½»Õ½\n°´¡°f¡±È·ÈÏ£¬°´ÆäËû¼üÈ¡Ïû\n";break; 	
+    	cout<<"æ˜¯å¦å’Œæ€ªç‰©äº¤æˆ˜\næŒ‰â€œfâ€ç¡®è®¤ï¼ŒæŒ‰å…¶ä»–é”®å–æ¶ˆ\n";break; 	
 		case 13:
-		cout<<"ÊÇ·ñºÍÄ§Íõ½»Õ½\n°´¡°f¡±È·ÈÏ£¬°´ÆäËû¼üÈ¡Ïû\n";break;        
+		cout<<"æ˜¯å¦å’Œé­”ç‹äº¤æˆ˜\næŒ‰â€œfâ€ç¡®è®¤ï¼ŒæŒ‰å…¶ä»–é”®å–æ¶ˆ\n";break;        
 	}
-	char one=getch();
+	char one=_getch();
 	gotoxy(0,40);
 	cout<<"                                        \n                                        \n";		
 	if(one=='f'||one=='F')  
@@ -693,7 +693,7 @@ int interaction(int num) //ÓÎÍæÊ±µÄ½»»¥
 }
 
 
-void addhp() //¼ÓÑªµÄº¯Êı 
+void addhp() //åŠ è¡€çš„å‡½æ•° 
 {
 	fighter.hp+=999;
 	if(fighter.hp>fighter.max)
@@ -703,7 +703,7 @@ void addhp() //¼ÓÑªµÄº¯Êı
 }
 
 
-void upgrade() //Éı¼¶µÄº¯Êı
+void upgrade() //å‡çº§çš„å‡½æ•°
 {
 	while(fighter.exp>=50)
 	{
@@ -716,19 +716,19 @@ void upgrade() //Éı¼¶µÄº¯Êı
 }
 
 
-void battle(int *p) //Õ½¶·µÄº¯Êı 
-{   //xÊÇ¹Ì¶¨ÉËº¦,yÊÇ»ù´¡ÉËº¦,zÊÇ×ÜÉËº¦ 
+void battle(int *p) //æˆ˜æ–—çš„å‡½æ•° 
+{   //xæ˜¯å›ºå®šä¼¤å®³,yæ˜¯åŸºç¡€ä¼¤å®³,zæ˜¯æ€»ä¼¤å®³ 
     int h_1=monster[0].h;
     int h_2=monster[1].h;
     int h_3=monster[2].h;
     int h_4=boss.h;
-	int x1,y1,z1; //¶¨ÒåÓÂÕßµÄÊı¾İ 
-	int x2,y2,z2; //¶¨Òå¹ÖµÄÊı¾İ 
+	int x1,y1,z1; //å®šä¹‰å‹‡è€…çš„æ•°æ® 
+	int x2,y2,z2; //å®šä¹‰æ€ªçš„æ•°æ® 
     switch(*p)
     {
         case 10:
-		x1=20; y1=fighter.atk-monster[0].d; z1=x1+y1; //ÓÂÕßµÄ¹¥»÷Êı¾İ 
-        x2=20; y2=monster[0].a-fighter.def; z2=x2+y2; //Ò»ºÅ¹ÖµÄ¹¥»÷Êı¾İ
+		x1=20; y1=fighter.atk-monster[0].d; z1=x1+y1; //å‹‡è€…çš„æ”»å‡»æ•°æ® 
+        x2=20; y2=monster[0].a-fighter.def; z2=x2+y2; //ä¸€å·æ€ªçš„æ”»å‡»æ•°æ®
         while(fighter.hp>0&&h_1>0)
         { 
         	h_1-=z1;
@@ -746,8 +746,8 @@ void battle(int *p) //Õ½¶·µÄº¯Êı
 	    }
 		break;
 		case 11:
-		x1=20;y1=fighter.atk-monster[1].d;z1=x1+y1; //ÓÂÕßµÄ¹¥»÷Êı¾İ
-		x2=20;y2=monster[1].a-fighter.def;z2=x2+y2; //¶şºÅ¹ÖµÄ¹¥»÷Êı¾İ
+		x1=20;y1=fighter.atk-monster[1].d;z1=x1+y1; //å‹‡è€…çš„æ”»å‡»æ•°æ®
+		x2=20;y2=monster[1].a-fighter.def;z2=x2+y2; //äºŒå·æ€ªçš„æ”»å‡»æ•°æ®
 	    while(fighter.hp>0&&h_2>0)
         {
         	h_2-=z1;
@@ -765,8 +765,8 @@ void battle(int *p) //Õ½¶·µÄº¯Êı
 	    }
 		break; 
         case 12:
-		x1=20; y1=fighter.atk-monster[2].d; z1=x1+y1; //ÓÂÕßµÄ¹¥»÷Êı¾İ 
-        x2=20; y2=monster[2].a-fighter.def; z2=x2+y2; //ÈıºÅ¹ÖµÄ¹¥»÷Êı¾İ
+		x1=20; y1=fighter.atk-monster[2].d; z1=x1+y1; //å‹‡è€…çš„æ”»å‡»æ•°æ® 
+        x2=20; y2=monster[2].a-fighter.def; z2=x2+y2; //ä¸‰å·æ€ªçš„æ”»å‡»æ•°æ®
         while(fighter.hp>0&&h_3>0)
         {
         	h_3-=z1;
@@ -784,8 +784,8 @@ void battle(int *p) //Õ½¶·µÄº¯Êı
 	    }
 		break;
         case 13:
-		x1=20; y1=fighter.atk-boss.d; z1=x1+y1; //ÓÂÕßµÄ¹¥»÷Êı¾İ 
-        x2=20; y2=boss.a-fighter.def; z2=x2+y2; //Ä§ÍõµÄ¹¥»÷Êı¾İ
+		x1=20; y1=fighter.atk-boss.d; z1=x1+y1; //å‹‡è€…çš„æ”»å‡»æ•°æ® 
+        x2=20; y2=boss.a-fighter.def; z2=x2+y2; //é­”ç‹çš„æ”»å‡»æ•°æ®
         while(fighter.hp>0&&h_4>0)
         {
         	h_4-=z1;
@@ -805,10 +805,10 @@ void battle(int *p) //Õ½¶·µÄº¯Êı
 }
 
 
-void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯ 
+void keydown() //æ“æ§å‹‡è€…ç§»åŠ¨ 
 {
 	
-    int keydown=getch();
+    int keydown=_getch();
     if(keydown==ESC)
     {
     	system("cls");
@@ -821,7 +821,7 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 	    {
 	        case 'W':
 	        case 'w':
-	        if(map[cas][fighter.i-1][fighter.j]==2||map[cas][fighter.i-1][fighter.j]==3) //ÅĞ¶ÏÇ°ÃæÊÇ·ñÎªÂ·»ò»ØÑªµã 
+	        if(map[cas][fighter.i-1][fighter.j]==2||map[cas][fighter.i-1][fighter.j]==3) //åˆ¤æ–­å‰é¢æ˜¯å¦ä¸ºè·¯æˆ–å›è¡€ç‚¹ 
 		    { 
 	
 		        map[cas][fighter.i][fighter.j]-=2;
@@ -832,7 +832,7 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 		        }
 	        }
 	        else
-			if(map[cas][fighter.i-1][fighter.j]==6||map[cas][fighter.i-1][fighter.j]==7) //ÅĞ¶ÏÇ°ÃæÊÇ·ñÎªÂ¥Ìİ 
+			if(map[cas][fighter.i-1][fighter.j]==6||map[cas][fighter.i-1][fighter.j]==7) //åˆ¤æ–­å‰é¢æ˜¯å¦ä¸ºæ¥¼æ¢¯ 
 			{
 				if(interaction(map[cas][fighter.i-1][fighter.j])==1)
 				{
@@ -853,14 +853,14 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 	            }
 			}
 	        else 
-			if(map[cas][fighter.i-1][fighter.j]==8) //ÅĞ¶ÏÇ°ÃæÊÇ·ñÊÇÔ¿³× 
+			if(map[cas][fighter.i-1][fighter.j]==8) //åˆ¤æ–­å‰é¢æ˜¯å¦æ˜¯é’¥åŒ™ 
 			{
 				map[cas][fighter.i][fighter.j]-=2;
 		        map[cas][fighter.i-1][fighter.j]-=4;
 		        fighter.key+=1;
 			} 
 			else 
-			if(map[cas][fighter.i-1][fighter.j]==9) //ÅĞ¶ÏÇ°ÃæÊÇ·ñÊÇÃÅ 
+			if(map[cas][fighter.i-1][fighter.j]==9) //åˆ¤æ–­å‰é¢æ˜¯å¦æ˜¯é—¨ 
 			{
 				if(interaction(map[cas][fighter.i-1][fighter.j])==1)
 				{
@@ -877,24 +877,24 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 			    }
 			}
 			else
-			if(map[cas][fighter.i-1][fighter.j]==22) //ÅĞ¶ÏÇ°ÃæÊÇ·ñÎªÒÆ¶¯µÄÇ½ 
+			if(map[cas][fighter.i-1][fighter.j]==22) //åˆ¤æ–­å‰é¢æ˜¯å¦ä¸ºç§»åŠ¨çš„å¢™ 
 			{
 				gameover=3;
 			}
 	        else 
-			if(map[cas][fighter.i-1][fighter.j]==10||map[cas][fighter.i-1][fighter.j]==11||map[cas][fighter.i-1][fighter.j]==12||map[cas][fighter.i-1][fighter.j]==13) //ÅĞ¶ÏÇ°ÃæÊÇ·ñÎª¹Ö»òÄ§Íõ
+			if(map[cas][fighter.i-1][fighter.j]==10||map[cas][fighter.i-1][fighter.j]==11||map[cas][fighter.i-1][fighter.j]==12||map[cas][fighter.i-1][fighter.j]==13) //åˆ¤æ–­å‰é¢æ˜¯å¦ä¸ºæ€ªæˆ–é­”ç‹
 			{
 	            if(interaction(map[cas][fighter.i-1][fighter.j])==1)
 	            {
 			        battle(&map[cas][fighter.i-1][fighter.j]);
 			    }
 			}
-	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j>0&&fighter.j<49)) //²»ÔÚ¡°ÃÔÎíÉ­ÁÖ¡±Ê±µÄµØÍ¼Ë¢ĞÂ 		
+	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j>0&&fighter.j<49)) //ä¸åœ¨â€œè¿·é›¾æ£®æ—â€æ—¶çš„åœ°å›¾åˆ·æ–° 		
 			{
 			    gotoxy(fighter.j,fighter.i+11);
 			    drawmap_1(&map[cas][fighter.i][fighter.j]);
 			}
-	        if(!(cas==1&&fighter.i-1>12&&fighter.i-1<24&&fighter.j>0&&fighter.j<49)) //²»ÔÚ¡°ÃÔÎíÉ­ÁÖ¡±Ê±µÄµØÍ¼Ë¢ĞÂ 
+	        if(!(cas==1&&fighter.i-1>12&&fighter.i-1<24&&fighter.j>0&&fighter.j<49)) //ä¸åœ¨â€œè¿·é›¾æ£®æ—â€æ—¶çš„åœ°å›¾åˆ·æ–° 
 			{
 				gotoxy(fighter.j,fighter.i+10);
 			    drawmap_1(&map[cas][fighter.i-1][fighter.j]);
@@ -902,7 +902,7 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 			break;
 	        case 'S':
 	        case 's':
-	        if(map[cas][fighter.i+1][fighter.j]==2||map[cas][fighter.i+1][fighter.j]==3) //ÅĞ¶ÏºóÃæÊÇ·ñÎªÂ·»ò»ØÑªµã 
+	        if(map[cas][fighter.i+1][fighter.j]==2||map[cas][fighter.i+1][fighter.j]==3) //åˆ¤æ–­åé¢æ˜¯å¦ä¸ºè·¯æˆ–å›è¡€ç‚¹ 
 	        {
 		        map[cas][fighter.i][fighter.j]-=2;
 		        map[cas][fighter.i+1][fighter.j]+=2;
@@ -912,7 +912,7 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 		        }
 	        }
 			else
-			if(map[cas][fighter.i+1][fighter.j]==6||map[cas][fighter.i+1][fighter.j]==7) //ÅĞ¶ÏºóÃæÊÇ·ñÎªÂ¥Ìİ 
+			if(map[cas][fighter.i+1][fighter.j]==6||map[cas][fighter.i+1][fighter.j]==7) //åˆ¤æ–­åé¢æ˜¯å¦ä¸ºæ¥¼æ¢¯ 
 			{
 				if(interaction(map[cas][fighter.i+1][fighter.j])==1)
 				{
@@ -933,14 +933,14 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 				}
 		    }
 	        else 
-			if(map[cas][fighter.i+1][fighter.j]==8) //ÅĞ¶ÏºóÃæÊÇ·ñÊÇÔ¿³× 
+			if(map[cas][fighter.i+1][fighter.j]==8) //åˆ¤æ–­åé¢æ˜¯å¦æ˜¯é’¥åŒ™ 
 			{
 				map[cas][fighter.i][fighter.j]-=2;
 		        map[cas][fighter.i+1][fighter.j]-=4;
 		        fighter.key+=1;
 			} 
 			else 
-			if(map[cas][fighter.i+1][fighter.j]==9) //ÅĞ¶ÏºóÃæÊÇ·ñÊÇÃÅ 
+			if(map[cas][fighter.i+1][fighter.j]==9) //åˆ¤æ–­åé¢æ˜¯å¦æ˜¯é—¨ 
 			{
 				if(interaction(map[cas][fighter.i+1][fighter.j])==1)
 				{
@@ -957,24 +957,24 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 			    }
 			}
 			else
-			if(map[cas][fighter.i+1][fighter.j]==22) //ÅĞ¶ÏºóÃæÊÇ·ñÎªÒÆ¶¯µÄÇ½ 
+			if(map[cas][fighter.i+1][fighter.j]==22) //åˆ¤æ–­åé¢æ˜¯å¦ä¸ºç§»åŠ¨çš„å¢™ 
 			{
 				gameover=3;
 			}
 	        else 
-			if(map[cas][fighter.i+1][fighter.j]==10||map[cas][fighter.i+1][fighter.j]==11||map[cas][fighter.i+1][fighter.j]==12||map[cas][fighter.i+1][fighter.j]==13) //ÅĞ¶ÏºóÃæÊÇ·ñÎª¹Ö»òÄ§Íõ 
+			if(map[cas][fighter.i+1][fighter.j]==10||map[cas][fighter.i+1][fighter.j]==11||map[cas][fighter.i+1][fighter.j]==12||map[cas][fighter.i+1][fighter.j]==13) //åˆ¤æ–­åé¢æ˜¯å¦ä¸ºæ€ªæˆ–é­”ç‹ 
 		    {
 		    	if(interaction(map[cas][fighter.i+1][fighter.j])==1)
 		    	{
 			        battle(&map[cas][fighter.i+1][fighter.j]); 
 			    }
 			}
-	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j>0&&fighter.j<49)) //²»ÔÚ¡°ÃÔÎíÉ­ÁÖ¡±Ê±µÄµØÍ¼Ë¢ĞÂ 		
+	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j>0&&fighter.j<49)) //ä¸åœ¨â€œè¿·é›¾æ£®æ—â€æ—¶çš„åœ°å›¾åˆ·æ–° 		
 			{
 			    gotoxy(fighter.j,fighter.i+11);
 			    drawmap_1(&map[cas][fighter.i][fighter.j]);
 			}
-	        if(!(cas==1&&fighter.i+1>12&&fighter.i+1<24&&fighter.j>0&&fighter.j<49)) //²»ÔÚ¡°ÃÔÎíÉ­ÁÖ¡±Ê±µÄµØÍ¼Ë¢ĞÂ 
+	        if(!(cas==1&&fighter.i+1>12&&fighter.i+1<24&&fighter.j>0&&fighter.j<49)) //ä¸åœ¨â€œè¿·é›¾æ£®æ—â€æ—¶çš„åœ°å›¾åˆ·æ–° 
 			{
 				gotoxy(fighter.j,fighter.i+12);
 			    drawmap_1(&map[cas][fighter.i+1][fighter.j]);
@@ -982,7 +982,7 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 			break;
 	        case 'A':
 	        case 'a':
-	        if(map[cas][fighter.i][fighter.j-1]==2||map[cas][fighter.i][fighter.j-1]==3) //ÅĞ¶Ï×ó±ßÊÇ·ñÎªÂ·»ò»ØÑªµã 
+	        if(map[cas][fighter.i][fighter.j-1]==2||map[cas][fighter.i][fighter.j-1]==3) //åˆ¤æ–­å·¦è¾¹æ˜¯å¦ä¸ºè·¯æˆ–å›è¡€ç‚¹ 
 	        {
 		        map[cas][fighter.i][fighter.j]-=2;
 		        map[cas][fighter.i][fighter.j-1]+=2;
@@ -992,7 +992,7 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 		        }
 	        }
 			else
-			if(map[cas][fighter.i][fighter.j-1]==6||map[cas][fighter.i][fighter.j-1]==7) //ÅĞ¶Ï×ó±ßÊÇ·ñÎªÂ¥Ìİ 
+			if(map[cas][fighter.i][fighter.j-1]==6||map[cas][fighter.i][fighter.j-1]==7) //åˆ¤æ–­å·¦è¾¹æ˜¯å¦ä¸ºæ¥¼æ¢¯ 
 			{ 
 				if(interaction(map[cas][fighter.i][fighter.j-1])==1)
 				{
@@ -1014,14 +1014,14 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 	            }
 			}
 	        else 
-			if(map[cas][fighter.i][fighter.j-1]==8) //ÅĞ¶Ï×ó±ßÊÇ·ñÊÇÔ¿³× 
+			if(map[cas][fighter.i][fighter.j-1]==8) //åˆ¤æ–­å·¦è¾¹æ˜¯å¦æ˜¯é’¥åŒ™ 
 			{
 				map[cas][fighter.i][fighter.j]-=2;
 		        map[cas][fighter.i][fighter.j-1]-=4;
 		        fighter.key+=1;
 			} 
 			else 
-			if(map[cas][fighter.i][fighter.j-1]==9) //ÅĞ¶Ï×ó±ßÊÇ·ñÊÇÃÅ 
+			if(map[cas][fighter.i][fighter.j-1]==9) //åˆ¤æ–­å·¦è¾¹æ˜¯å¦æ˜¯é—¨ 
 			{
 				if(interaction(map[cas][fighter.i][fighter.j-1])==1)
 				{
@@ -1038,24 +1038,24 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 			    }
 			}
 			else
-			if(map[cas][fighter.i][fighter.j-1]==22) //ÅĞ¶Ï×ó±ßÊÇ·ñÎªÒÆ¶¯µÄÇ½ 
+			if(map[cas][fighter.i][fighter.j-1]==22) //åˆ¤æ–­å·¦è¾¹æ˜¯å¦ä¸ºç§»åŠ¨çš„å¢™ 
 			{
 				gameover=3;
 			}
 	        else 
-			if(map[cas][fighter.i][fighter.j-1]==10||map[cas][fighter.i][fighter.j-1]==11||map[cas][fighter.i][fighter.j-1]==12||map[cas][fighter.i][fighter.j-1]==13) //ÅĞ¶Ï×ó±ßÊÇ·ñÎª¹Ö»òÄ§Íõ
+			if(map[cas][fighter.i][fighter.j-1]==10||map[cas][fighter.i][fighter.j-1]==11||map[cas][fighter.i][fighter.j-1]==12||map[cas][fighter.i][fighter.j-1]==13) //åˆ¤æ–­å·¦è¾¹æ˜¯å¦ä¸ºæ€ªæˆ–é­”ç‹
 			{ 
 			    if(interaction(map[cas][fighter.i][fighter.j-1])==1)
 			    {
 			    	battle(&map[cas][fighter.i][fighter.j-1]); 
 			    }
 			}
-	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j>0&&fighter.j<49)) //²»ÔÚ¡°ÃÔÎíÉ­ÁÖ¡±Ê±µÄµØÍ¼Ë¢ĞÂ 		
+	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j>0&&fighter.j<49)) //ä¸åœ¨â€œè¿·é›¾æ£®æ—â€æ—¶çš„åœ°å›¾åˆ·æ–° 		
 			{
 			    gotoxy(fighter.j,fighter.i+11);
 			    drawmap_1(&map[cas][fighter.i][fighter.j]);
 			}
-	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j-1>0&&fighter.j-1<49)) //²»ÔÚ¡°ÃÔÎíÉ­ÁÖ¡±Ê±µÄµØÍ¼Ë¢ĞÂ 
+	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j-1>0&&fighter.j-1<49)) //ä¸åœ¨â€œè¿·é›¾æ£®æ—â€æ—¶çš„åœ°å›¾åˆ·æ–° 
 			{
 				gotoxy(fighter.j-1,fighter.i+11);
 			    drawmap_1(&map[cas][fighter.i][fighter.j-1]);
@@ -1063,7 +1063,7 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 			break;
 	        case 'D':
 	        case 'd':
-	        if(map[cas][fighter.i][fighter.j+1]==2||map[cas][fighter.i][fighter.j+1]==3) //ÅĞ¶ÏÓÒ±ßÊÇ·ñÎªÂ·»ò»ØÑªµã 
+	        if(map[cas][fighter.i][fighter.j+1]==2||map[cas][fighter.i][fighter.j+1]==3) //åˆ¤æ–­å³è¾¹æ˜¯å¦ä¸ºè·¯æˆ–å›è¡€ç‚¹ 
 	        {
 		        map[cas][fighter.i][fighter.j]-=2;
 		        map[cas][fighter.i][fighter.j+1]+=2;
@@ -1073,7 +1073,7 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 		        }
 	        }
 			else
-			if(map[cas][fighter.i][fighter.j+1]==6||map[cas][fighter.i][fighter.j+1]==7) //ÅĞ¶ÏÓÒ±ßÊÇ·ñÎªÂ¥Ìİ 
+			if(map[cas][fighter.i][fighter.j+1]==6||map[cas][fighter.i][fighter.j+1]==7) //åˆ¤æ–­å³è¾¹æ˜¯å¦ä¸ºæ¥¼æ¢¯ 
 			{
 				if(interaction(map[cas][fighter.i][fighter.j+1])==1)
 				{
@@ -1094,14 +1094,14 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 		        }
 			}
 	        else 
-			if(map[cas][fighter.i][fighter.j+1]==8) //ÅĞ¶ÏÓÒ±ßÊÇ·ñÊÇÔ¿³× 
+			if(map[cas][fighter.i][fighter.j+1]==8) //åˆ¤æ–­å³è¾¹æ˜¯å¦æ˜¯é’¥åŒ™ 
 			{
 				map[cas][fighter.i][fighter.j]-=2;
 		        map[cas][fighter.i][fighter.j+1]-=4;
 		        fighter.key+=1;
 			} 
 			else
-			if(map[cas][fighter.i][fighter.j+1]==9) //ÅĞ¶ÏÓÒ±ßÊÇ·ñÊÇÃÅ 
+			if(map[cas][fighter.i][fighter.j+1]==9) //åˆ¤æ–­å³è¾¹æ˜¯å¦æ˜¯é—¨ 
 			{
 				if(interaction(map[cas][fighter.i][fighter.j+1])==1)
 			    {
@@ -1118,24 +1118,24 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 			    }
 			}
 			else
-			if(map[cas][fighter.i][fighter.j+1]==22) //ÅĞ¶ÏÓÒ±ßÊÇ·ñÎªÒÆ¶¯µÄÇ½ 
+			if(map[cas][fighter.i][fighter.j+1]==22) //åˆ¤æ–­å³è¾¹æ˜¯å¦ä¸ºç§»åŠ¨çš„å¢™ 
 			{
 				gameover=3;
 			}
 	        else 
-			if(map[cas][fighter.i][fighter.j+1]==10||map[cas][fighter.i][fighter.j+1]==11||map[cas][fighter.i][fighter.j+1]==12||map[cas][fighter.i][fighter.j+1]==13) //ÅĞ¶ÏÓÒ±ßÊÇ·ñÎª¹Ö»òÄ§Íõ
+			if(map[cas][fighter.i][fighter.j+1]==10||map[cas][fighter.i][fighter.j+1]==11||map[cas][fighter.i][fighter.j+1]==12||map[cas][fighter.i][fighter.j+1]==13) //åˆ¤æ–­å³è¾¹æ˜¯å¦ä¸ºæ€ªæˆ–é­”ç‹
 			{
 				if(interaction(map[cas][fighter.i][fighter.j+1])==1)
 				{
 			    	battle(&map[cas][fighter.i][fighter.j+1]); 
 			    }
 			}
-	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j>0&&fighter.j<49)) //²»ÔÚ¡°ÃÔÎíÉ­ÁÖ¡±Ê±µÄµØÍ¼Ë¢ĞÂ 		
+	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j>0&&fighter.j<49)) //ä¸åœ¨â€œè¿·é›¾æ£®æ—â€æ—¶çš„åœ°å›¾åˆ·æ–° 		
 			{
 			    gotoxy(fighter.j,fighter.i+11);
 			    drawmap_1(&map[cas][fighter.i][fighter.j]);
 			}
-	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j+1>0&&fighter.j+1<49)) //²»ÔÚ¡°ÃÔÎíÉ­ÁÖ¡±Ê±µÄµØÍ¼Ë¢ĞÂ 
+	        if(!(cas==1&&fighter.i>12&&fighter.i<24&&fighter.j+1>0&&fighter.j+1<49)) //ä¸åœ¨â€œè¿·é›¾æ£®æ—â€æ—¶çš„åœ°å›¾åˆ·æ–° 
 			{
 				gotoxy(fighter.j+1,fighter.i+11);
 			    drawmap_1(&map[cas][fighter.i][fighter.j+1]);
@@ -1146,7 +1146,7 @@ void keydown() //²Ù¿ØÓÂÕßÒÆ¶¯
 }
 
 
-void changemap() //¸Ä±äµØÍ¼£¨ÒÆ¶¯ÃÔ¹¬£©µÄº¯Êı 
+void changemap() //æ”¹å˜åœ°å›¾ï¼ˆç§»åŠ¨è¿·å®«ï¼‰çš„å‡½æ•° 
 {
 	for(int w=17;w<=20;w+=3)
 	{
@@ -1171,7 +1171,7 @@ void changemap() //¸Ä±äµØÍ¼£¨ÒÆ¶¯ÃÔ¹¬£©µÄº¯Êı
 }
 
 
-void judge() //ÅĞ¶ÏÓÂÕßÊÇ·ñ±»ÒÆ¶¯ÃÔ¹¬ÖĞµÄÇ½Ñ¹±âµÄº¯Êı 
+void judge() //åˆ¤æ–­å‹‡è€…æ˜¯å¦è¢«ç§»åŠ¨è¿·å®«ä¸­çš„å¢™å‹æ‰çš„å‡½æ•° 
 {
 	for(int w=17;w<=20;w+=3)
 	{
@@ -1197,7 +1197,7 @@ int main()
 	system("mode con cols=120 lines=50");
 	foreword(); 
 	Sleep(2000);  
-    cout<<"ÓÎÏ·¿ªÊ¼£º\n\n";   
+    cout<<"æ¸¸æˆå¼€å§‹ï¼š\n\n";   
     Sleep(1000);
     load();
 	system("cls"); 	
@@ -1208,15 +1208,15 @@ int main()
     	{
     		search();                                                        
 		    drawstate();                                                      
-		    cout<<"ÇëÊäÈë'w''s''a''d'¿ØÖÆÓÂÕß½øĞĞÉÏÏÂ×óÓÒµÄÒÆ¶¯\n";          
+		    cout<<"è¯·è¾“å…¥'w''s''a''d'æ§åˆ¶å‹‡è€…è¿›è¡Œä¸Šä¸‹å·¦å³çš„ç§»åŠ¨\n";          
 		    cout<<"------------------------------------------------------------\n";                                          
-		    cout<<"µØÍ¼:\n"; 
+		    cout<<"åœ°å›¾:\n"; 
 		    drawmap_3();
 			changemap();                                                       
 			gotoxy(0,36);
-			cout<<"×¢£ºÍ¼×óÏÂ½ÇÎªÔ­µã£¬ÓÒÎª x ÖáÕı·½Ïò£¬ÉÏÎª y ÖáÕı·½Ïò\n\n";
+			cout<<"æ³¨ï¼šå›¾å·¦ä¸‹è§’ä¸ºåŸç‚¹ï¼Œå³ä¸º x è½´æ­£æ–¹å‘ï¼Œä¸Šä¸º y è½´æ­£æ–¹å‘\n\n";
 			gotoxy(55,11); 
-			cout<<"HUD£º";			
+			cout<<"HUDï¼š";			
 			type(); 			
 			location();
 			gotoxy(0,40);
@@ -1231,15 +1231,15 @@ int main()
 	   	{
 			search();                                                          
 		    drawstate();                                                        
-		    cout<<"ÇëÊäÈë'w''s''a''d'¿ØÖÆÓÂÕß½øĞĞÉÏÏÂ×óÓÒµÄÒÆ¶¯\n";          
+		    cout<<"è¯·è¾“å…¥'w''s''a''d'æ§åˆ¶å‹‡è€…è¿›è¡Œä¸Šä¸‹å·¦å³çš„ç§»åŠ¨\n";          
 		    cout<<"------------------------------------------------------------\n";                                          
-		    cout<<"µØÍ¼:\n"; 
+		    cout<<"åœ°å›¾:\n"; 
 		    drawmap_2();
 			changemap();                                                      
 			gotoxy(0,36);
-			cout<<"×¢£ºÍ¼×óÏÂ½ÇÎªÔ­µã£¬ÓÒÎª x ÖáÕı·½Ïò£¬ÉÏÎª y ÖáÕı·½Ïò\n\n";
+			cout<<"æ³¨ï¼šå›¾å·¦ä¸‹è§’ä¸ºåŸç‚¹ï¼Œå³ä¸º x è½´æ­£æ–¹å‘ï¼Œä¸Šä¸º y è½´æ­£æ–¹å‘\n\n";
 			gotoxy(55,11);
-			cout<<"HUD£º";
+			cout<<"HUDï¼š";
 			type(); 
 			location(); 
 			gotoxy(0,40);
@@ -1251,15 +1251,15 @@ int main()
 	}
 	if(gameover==1)
 	{ 
-	    cout<<"Äã±»¹ÖÉ±ËÀÁË£¡£¡£¡²»ÒªÆøÄÙ£¬ÔÙÀ´Ò»´Î°É";
+	    cout<<"ä½ è¢«æ€ªæ€æ­»äº†ï¼ï¼ï¼ä¸è¦æ°”é¦ï¼Œå†æ¥ä¸€æ¬¡å§";
     }
 	else if(gameover==2)
 	{
-	    cout<<"W I N !!!\n¹§Ï²ÄãÍê³ÉÁËÌôÕ½\nÓÎÏ·½áÊøÁË£¬Éú»î»¹ÔÚ¼ÌĞø£¬ÈÃÎÒÃÇ¼ÌĞøÒÔ¡°ÓÂÕß¡±µÄÉí·İ¿Ë·şÃ¿Ò»¸öÌôÕ½°É\n\n\nÊÓ¾õ×éÍõ¼ª³©¾ŞÏ×\n\n\nÓÎÏ·ÖÆ×÷£ºÍõ¼ª³©\nÓÎÏ·´´Òâ£ºÍõ¼ª³©";	
+	    cout<<"W I N !!!\næ­å–œä½ å®Œæˆäº†æŒ‘æˆ˜\næ¸¸æˆç»“æŸäº†ï¼Œç”Ÿæ´»è¿˜åœ¨ç»§ç»­ï¼Œè®©æˆ‘ä»¬ç»§ç»­ä»¥â€œå‹‡è€…â€çš„èº«ä»½å…‹æœæ¯ä¸€ä¸ªæŒ‘æˆ˜å§\n\n\nè§†è§‰ç»„ç‹å‰ç•…å·¨çŒ®\n\n\næ¸¸æˆåˆ¶ä½œï¼šç‹å‰ç•…\næ¸¸æˆåˆ›æ„ï¼šç‹å‰ç•…";	
     }
     else if(gameover==3)
     {
-    	cout<<"Äã±»Ç½Ñ¹±âÁË£¡£¡£¡ÏÂ´ÎÒªĞ¡ĞÄÅ¶";
+    	cout<<"ä½ è¢«å¢™å‹æ‰äº†ï¼ï¼ï¼ä¸‹æ¬¡è¦å°å¿ƒå“¦";
 	}
 	
 	return 0;
